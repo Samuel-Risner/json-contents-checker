@@ -1,0 +1,25 @@
+{
+  "name": "json-contents-checker",
+  "version": "1.0.0",
+  "description": "A npm package (for express.js) for checking the contents of a json object. (The TypeScript files are here.)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build_ts": "tsc -p ./tsconfig.json",
+    "prepublish": "tsc -p ./tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samuel-Risner/json-contents-checker.git"
+  },
+  "author": "Samuel Risner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Samuel-Risner/json-contents-checker/issues"
+  },
+  "homepage": "https://github.com/Samuel-Risner/json-contents-checker#readme",
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
+}
