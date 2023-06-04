@@ -1,3 +1,1 @@
-export default function doSomething(): boolean {
-    return false;
-}
+import doSomething from "@samuel-risner/json-contents-checker";
