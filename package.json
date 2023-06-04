@@ -1,7 +1,7 @@
 {
-  "name": "@samuel-risner/json-contents-checker",
+  "name": "@samuel-risner/json-contents-checker-testing",
   "version": "1.0.0",
-  "description": "A npm package (for express.js) for checking the contents of a json object. (The TypeScript files are here.)",
+  "description": "The testing branch.",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "scripts": {
@@ -17,8 +17,11 @@
   "bugs": {
     "url": "https://github.com/Samuel-Risner/json-contents-checker/issues"
   },
-  "homepage": "https://github.com/Samuel-Risner/json-contents-checker#readme",
+  "homepage": "https://github.com/Samuel-Risner/json-contents-checker/tree/testing#readme",
   "devDependencies": {
     "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@samuel-risner/json-contents-checker": "^1.0.0"
   }
 }
