@@ -1,2 +1,9 @@
 # json-contents-checker
- A npm package (for express.js) for checking the contents of a json object.
+
+A npm package (for express.js) for checking the contents of a json object.
+
+# Install
+
+```shell
+npm i @samuel-risner/json-contents-checker
+```
