@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A npm package (for express.js) for checking the contents of a json object. (The TypeScript files are here.)",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "types/index.d.ts",
   "scripts": {
     "build": "tsc -p ./tsconfig.json",
     "prepublish": "tsc -p ./tsconfig.json"
