@@ -1,2 +1,1 @@
-declare function doSomething(): boolean;
-export default doSomething;
+export default function doSomething(): boolean;

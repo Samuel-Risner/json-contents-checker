@@ -1,5 +1,3 @@
-function doSomething(): boolean {
+export default function doSomething(): boolean {
     return false;
 }
-
-export default doSomething;
