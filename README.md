@@ -12,10 +12,14 @@ npm i @samuel-risner/json-contents-checker
 
 # 1.0.0 - Testing Version
 
-## 1.0.0
+## 1.0.2
 
-Initial testing function
+Updated the compiler Options in the "tsconfig.json" file
 
 ## 1.0.1
 
-Fixed the path to the types file
+Fixed the path to the "@types" file
+
+## 1.0.0
+
+Initial testing function

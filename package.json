@@ -6,7 +6,9 @@
   "types": "@types/index.d.ts",
   "scripts": {
     "build": "tsc -p ./tsconfig.json",
-    "prepublish": "tsc -p ./tsconfig.json"
+    "prepublish": "tsc -p ./tsconfig.json",
+    "watch_ts": "tsc -p ./tsconfig.json --watch",
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +22,8 @@
   "homepage": "https://github.com/Samuel-Risner/json-contents-checker#readme",
   "devDependencies": {
     "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.17"
   }
 }
