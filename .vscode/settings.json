@@ -5,9 +5,11 @@
     "spellright.documentTypes": [
         "markdown",
         "latex",
-        "plaintext"
+        "plaintext",
+        "typescript"
     ],
     "cSpell.words": [
+        "nodenext",
         "risner",
         "Risner",
         "samuel"
