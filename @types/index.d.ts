@@ -1,1 +1,1 @@
-export default function doSomething(): boolean;
+export {};
