@@ -1,4 +1,4 @@
-import { CheckReturn, ErrorFunction, JsonObject, SmallCheckFunction, SuccessFunction, VerySmallCheckFunction } from "./types";
+import { CheckFunction, CheckReturn, ErrorFunction, JsonObject, SuccessFunction, VerySmallCheckFunction } from "./types";
 
 export default class SmallCheck {
 
@@ -12,15 +12,7 @@ export default class SmallCheck {
          * When the function returned by `combine` is called, this value is used as a key to retrieve the corresponding value from the object passed to the function returned by `combine`.
          * All the checks that are set will be performed on the retrieved value.
          */
-        private nameOfJsonAttribute: string,
-        /**
-         * When all the checks were successfully executed this code is returned.
-         */
-        private successCode: number=0,
-        /**
-         * When all the checks were successfully executed this message is returned.
-         */
-        private successMsg: string=""
+        private nameOfJsonAttribute: string
     ) {
         this.checks = [];
     }
@@ -221,13 +213,80 @@ export default class SmallCheck {
     }
 
     /**
+     * The check fails if the value contains any letters that are not in `letters`.
+     * 
+     * **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * 
+     * @param errorCode The code which is reported when the check fails.
+     * @param errorMsg The message which is reported when the check fails.
+     * @param letters The letters which the value may contain.
+     */
+    validLetters(errorCode: number, errorMsg: string, letters: string): this {
+        return this.checkCore(errorCode, errorMsg, (toCheck: string): boolean => {
+            for (const letter of toCheck) {
+                if (!letters.includes(letter)) return false;
+            }
+            return true;
+        })
+    }
+
+    /**
+     * The check fails if the value contains any letters that are in `letters`.
+     * 
+     * **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * 
+     * @param errorCode The code which is reported when the check fails.
+     * @param errorMsg The message which is reported when the check fails.
+     * @param letters The letters which the value may not contain.
+     */
+    invalidLetters(errorCode: number, errorMsg: string, letters: string): this {
+        return this.checkCore(errorCode, errorMsg, (toCheck: string): boolean => {
+            for (const letter of toCheck) {
+                if (letters.includes(letter)) return false;
+            }
+            return true;
+        })
+    }
+
+    /**
+     * The check fails if the value does not match the provided RegExp `regExp`.
+     * 
+     * **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * 
+     * @param errorCode The code which is reported when the check fails.
+     * @param errorMsg The message which is reported when the check fails.
+     * @param regExp The RegExp to which the value should match.
+     */
+    regExpMatch(errorCode: number, errorMsg: string, regExp: RegExp): this {
+        return this.checkCore(errorCode, errorMsg, (toCheck: string): boolean => {
+            return regExp.test(toCheck);
+        })
+    }
+
+    /**
+     * The check fails if the value matches the provided RegExp `regExp`.
+     * 
+     * **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * 
+     * @param errorCode The code which is reported when the check fails.
+     * @param errorMsg The message which is reported when the check fails.
+     * @param regExp The RegExp to which the value should not match.
+     */
+    regExpNoMatch(errorCode: number, errorMsg: string, regExp: RegExp): this {
+        return this.checkCore(errorCode, errorMsg, (toCheck: string): boolean => {
+            return !regExp.test(toCheck);
+        })
+    }
+
+    /**
      * Combines all the checks into one function and returns it.
      * 
-     * @param errorFunction The function that will be called when a check fails. The error code and message are passed to the function.
+     * @param successCode The code which is reported when all the checks succeeded.
+     * @param successMsg The message which is reported when all the checks succeeded.
      * @returns A function which when called with the object you want to check returns tuple containing `true` if the checks were successful, otherwise false. A code indicating the success or failure, the failure codes were specified with the single checks, the success one with the creation of this object. And a success or failure message, the failure messages were specified with the single checks, the success one with the creation of this object.
      */
-    combine(errorFunction: ErrorFunction, successFunction: SuccessFunction): SmallCheckFunction {
-        return (jsonObject: JsonObject): CheckReturn => {
+    combine(successCode: number=0, successMsg: string=""): CheckFunction {
+        return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
             for (const checkData of this.checks) {
                 if (checkData[0](jsonObject[this.nameOfJsonAttribute])) {
                     errorFunction(checkData[1], checkData[2]);
@@ -235,8 +294,9 @@ export default class SmallCheck {
                 }
             }
             
-            successFunction(this.successCode, this.successMsg);
-            return [true, this.successCode, this.successMsg];
+            successFunction(successCode, successMsg);
+            return [true, successCode, successMsg];
         };
     }
+
 }
