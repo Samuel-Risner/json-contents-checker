@@ -1,72 +1,31 @@
 import { NextFunction, Request, Response } from "express";
 
-import SmallCheck from "./smallCheck";
-import { BigCheckFunction, CheckReturn, ErrorFunction, JsonObject, Middleware, SmallCheckFunction, SuccessFunction } from "./types";
+import { CheckFunction, CheckReturn, ErrorFunction, JsonObject, Middleware, SuccessFunction } from "./types";
 
-function chainSmallChecks(
+function chainChecks(
     errorFunction: ErrorFunction,
     successFunction: SuccessFunction,
     jsonObject: JsonObject,
-    ...checks: SmallCheck[]
+    ...checks: CheckFunction[]
 ): () => void {
-    const combinedChecks: SmallCheckFunction[] = [];
-
-    checks.forEach((value: SmallCheck) => {
-        combinedChecks.push(value.combine(errorFunction, successFunction));
-    })
-
     return () => {
-        combinedChecks.forEach((value: (jsonObject: JsonObject) => CheckReturn) => {value(jsonObject);});
+        checks.forEach((value: CheckFunction) => {value(jsonObject, successFunction, errorFunction);});
     }
 }
 
-function chainBigChecks(
+function chainChecksMiddleware(
     errorFunction: ErrorFunction,
     successFunction: SuccessFunction,
     jsonObject: JsonObject,
-    ...checks: BigCheckFunction[]
-): () => void {
-
-    return () => {
-        checks.forEach((value: BigCheckFunction) => {value(jsonObject, successFunction, errorFunction);});
-    }
-}
-
-function chainSmallChecksMiddleware(
-    errorFunction: ErrorFunction,
-    successFunction: SuccessFunction,
-    jsonObject: JsonObject,
-    ...checks: SmallCheck[]
+    ...checks: CheckFunction[]
 ): Middleware {
-    const combinedChecks: SmallCheckFunction[] = [];
-
-    checks.forEach((value: SmallCheck) => {
-        combinedChecks.push(value.combine(errorFunction, successFunction));
-    })
-
     return (req: Request, res: Response, next: NextFunction) => {
-        combinedChecks.forEach((value: (jsonObject: JsonObject) => CheckReturn) => {value(jsonObject);});
-        next();
-    }
-}
-
-function chainBigChecksMiddleware(
-    errorFunction: ErrorFunction,
-    successFunction: SuccessFunction,
-    jsonObject: JsonObject,
-    ...checks: BigCheckFunction[]
-): Middleware {
-
-    return (req: Request, res: Response, next: NextFunction) => {
-        checks.forEach((value: BigCheckFunction) => {value(jsonObject, successFunction, errorFunction);});
-
+        checks.forEach((value: CheckFunction) => {value(jsonObject, successFunction, errorFunction);});
         next();
     }
 }
 
 export {
-    chainSmallChecks,
-    chainBigChecks,
-    chainSmallChecksMiddleware,
-    chainBigChecksMiddleware
+    chainChecks,
+    chainChecksMiddleware
 }
