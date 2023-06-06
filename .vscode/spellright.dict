@@ -3,3 +3,5 @@ npm
 param
 tsconfig
 boolean
+RegExp
+regExp
