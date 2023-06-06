@@ -1,11 +1,11 @@
-import { BigCheckFunction } from "./types";
-export { checkNumber };
+import { CheckFunction } from "./types";
+export { checkNumber, checkBoolean, checkString, CheckNumberProps, CheckBooleanProps, CheckStringProps };
 type CheckNumberProps = {
     nameOfJsonAttribute: string;
-    errorCode: number;
-    errorMsg: string;
-    successCode: number;
-    successMsg: string;
+    errorCode?: number;
+    errorMsg?: string;
+    successCode?: number;
+    successMsg?: string;
     notUndefined?: boolean;
     notNull?: boolean;
     isSafe?: boolean;
@@ -14,4 +14,32 @@ type CheckNumberProps = {
     minValue?: number;
     maxValue?: number;
 };
-declare function checkNumber({ nameOfJsonAttribute, errorCode, errorMsg, successCode, successMsg, notUndefined, notNull, isSafe, mayBeDecimal, isNumber, minValue, maxValue }: CheckNumberProps): BigCheckFunction;
+declare function checkNumber({ nameOfJsonAttribute, errorCode, errorMsg, successCode, successMsg, notUndefined, notNull, isSafe, mayBeDecimal, isNumber, minValue, maxValue }: CheckNumberProps): CheckFunction;
+type CheckBooleanProps = {
+    nameOfJsonAttribute: string;
+    errorCode?: number;
+    errorMsg?: string;
+    successCode?: number;
+    successMsg?: string;
+    notUndefined?: boolean;
+    notNull?: boolean;
+    isBoolean?: boolean;
+};
+declare function checkBoolean({ nameOfJsonAttribute, errorCode, errorMsg, successCode, successMsg, notUndefined, notNull, isBoolean }: CheckBooleanProps): CheckFunction;
+type CheckStringProps = {
+    nameOfJsonAttribute: string;
+    errorCode?: number;
+    errorMsg?: string;
+    successCode?: number;
+    successMsg?: string;
+    notUndefined?: boolean;
+    notNull?: boolean;
+    isString?: boolean;
+    minLength?: number;
+    maxLength?: number;
+    validChars?: string;
+    invalidChars?: string;
+    regExpMatch?: RegExp;
+    regExpNoMatch?: RegExp;
+};
+declare function checkString({ nameOfJsonAttribute, errorCode, errorMsg, successCode, successMsg, notUndefined, notNull, isString, minLength, maxLength, validChars, invalidChars, regExpMatch, regExpNoMatch }: CheckStringProps): CheckFunction;
