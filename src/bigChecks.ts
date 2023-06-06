@@ -1,15 +1,25 @@
-import { BigCheckFunction, CheckReturn, ErrorFunction, JsonObject, SuccessFunction } from "./types";
+import { CheckFunction, CheckReturn, ErrorFunction, JsonObject, SuccessFunction } from "./types";
 
 export {
-    checkNumber
+    checkNumber,
+    checkBoolean,
+    checkString,
+
+    CheckNumberProps,
+    CheckBooleanProps,
+    CheckStringProps
 }
+
+//
+// - Number
+//
 
 type CheckNumberProps = {
     nameOfJsonAttribute: string;
-    errorCode: number;
-    errorMsg: string;
-    successCode: number;
-    successMsg: string;
+    errorCode?: number;
+    errorMsg?: string;
+    successCode?: number;
+    successMsg?: string;
     notUndefined?: boolean;
     notNull?: boolean;
     isSafe?: boolean;
@@ -21,19 +31,19 @@ type CheckNumberProps = {
 
 function checkNumber({
     nameOfJsonAttribute,
-    errorCode,
-    errorMsg,
-    successCode,
-    successMsg,
-    notUndefined=true,
-    notNull=true,
+    errorCode=-1,
+    errorMsg="",
+    successCode=0,
+    successMsg="",
+    notUndefined,
+    notNull,
     isSafe=true,
-    mayBeDecimal=false,
-    isNumber=false,
+    mayBeDecimal,
+    isNumber,
     minValue,
     maxValue}: CheckNumberProps
-): BigCheckFunction {
-    return (jsonObject: JsonObject, successFunction: SuccessFunction, errorFunction: ErrorFunction): CheckReturn => {
+): CheckFunction {
+    return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
         const toCheck: unknown = jsonObject[nameOfJsonAttribute];
 
         if (_checkNumber(toCheck, notUndefined, notNull, isSafe, mayBeDecimal, isNumber, minValue, maxValue)) {
@@ -79,6 +89,151 @@ function _checkNumber(
 
     if (minValue && (toCheck as number < minValue)) return false;
     if (maxValue && (toCheck as number > maxValue)) return false;
+
+    return true;
+}
+
+//
+// - Boolean
+//
+
+type CheckBooleanProps = {
+    nameOfJsonAttribute: string;
+    errorCode?: number;
+    errorMsg?: string;
+    successCode?: number;
+    successMsg?: string;
+    notUndefined?: boolean;
+    notNull?: boolean;
+    isBoolean?: boolean;
+}
+
+function checkBoolean({
+    nameOfJsonAttribute,
+    errorCode=-1,
+    errorMsg="",
+    successCode=0,
+    successMsg="",
+    notUndefined,
+    notNull,
+    isBoolean=true
+}: CheckBooleanProps
+    ): CheckFunction {
+    return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
+        const toCheck: unknown = jsonObject[nameOfJsonAttribute];
+
+        if (_checkBoolean(toCheck, notUndefined, notNull, isBoolean)) {
+            successFunction(successCode, successMsg);
+            return [true, successCode, successMsg];
+        } else {
+            errorFunction(errorCode, errorMsg);
+            return [true, successCode, successMsg];
+        }
+    }
+}
+
+function _checkBoolean(
+    toCheck: unknown,
+    notUndefined: boolean=true,
+    notNull: boolean=true,
+    isBoolean: boolean=false,
+): boolean {
+    if (notUndefined && (toCheck === undefined)) return false;
+
+    if (notNull && (toCheck === null)) return false;
+
+    if (isBoolean && (typeof toCheck !== "boolean")) return false;
+
+    return true;
+}
+
+//
+// - String
+//
+
+type CheckStringProps = {
+    nameOfJsonAttribute: string;
+    errorCode?: number;
+    errorMsg?: string;
+    successCode?: number;
+    successMsg?: string;
+    notUndefined?: boolean;
+    notNull?: boolean;
+    isString?: boolean;
+    minLength?: number;
+    maxLength?: number;
+    validChars?: string;
+    invalidChars?: string;
+    regExpMatch?: RegExp;
+    regExpNoMatch?: RegExp;
+}
+
+function checkString({
+    nameOfJsonAttribute,
+    errorCode=-1,
+    errorMsg="",
+    successCode=0,
+    successMsg="",
+    notUndefined,
+    notNull,
+    isString=true,
+    minLength,
+    maxLength,
+    validChars,
+    invalidChars,
+    regExpMatch,
+    regExpNoMatch
+}: CheckStringProps
+): CheckFunction {
+    return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
+        const toCheck: unknown = jsonObject[nameOfJsonAttribute];
+
+        if (_checkString(toCheck, notUndefined, notNull, isString, minLength, maxLength, validChars, invalidChars, regExpMatch, regExpNoMatch)) {
+            successFunction(successCode, successMsg);
+            return [true, successCode, successMsg];
+        } else {
+            errorFunction(errorCode, errorMsg);
+            return [true, successCode, successMsg];
+        }
+    }
+}
+
+function _checkString(
+    toCheck: unknown,
+    notUndefined: boolean=true,
+    notNull: boolean=true,
+    isString: boolean=false,
+    minLength?: number,
+    maxLength?: number,
+    validChars?: string,
+    invalidChars?: string,
+    regExpMatch?: RegExp,
+    regExpNoMatch?: RegExp
+): boolean {
+    if (notUndefined && (toCheck === undefined)) return false;
+
+    if (notNull && (toCheck === null)) return false;
+
+    if (isString && (typeof toCheck !== "string")) return false;
+
+    if (minLength && ((toCheck as string).length < minLength)) return false;
+    if (maxLength && ((toCheck as string).length > maxLength)) return false;
+
+    if (validChars) {
+        for (const letter of toCheck as string) {
+            if (!validChars.includes(letter)) return false;
+        }
+    }
+
+    if (invalidChars) {
+        for (const letter of toCheck as string) {
+            if (invalidChars.includes(letter)) return false;
+        }
+    }
+
+    if (regExpMatch && !regExpMatch.test(toCheck as string)) return false;
+
+    if (regExpNoMatch && regExpNoMatch.test(toCheck as string)) return false;
 
     return true;
 }
