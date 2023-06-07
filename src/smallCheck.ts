@@ -289,12 +289,12 @@ export default class SmallCheck {
         return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
             for (const checkData of this.checks) {
                 if (checkData[0](jsonObject[this.nameOfJsonAttribute])) {
-                    errorFunction(checkData[1], checkData[2]);
+                    errorFunction(checkData[1], checkData[2], this.nameOfJsonAttribute);
                     return [false, checkData[1], checkData[2]];
                 }
             }
             
-            successFunction(successCode, successMsg);
+            successFunction(successCode, successMsg, this.nameOfJsonAttribute);
             return [true, successCode, successMsg];
         };
     }
