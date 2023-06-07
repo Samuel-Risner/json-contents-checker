@@ -1,7 +1,7 @@
 import { CheckBooleanArgs, CheckStringArgs, CheckNumberArgs, checkBoolean, checkNumber, checkString} from "./bigChecks";
-import { chainChecks, chainChecksMiddleware } from "./check";
+import { chainChecks, chainChecksMiddleware, chainChecksMiddlewareCustom } from "./check";
 import SmallCheck from "./smallCheck";
-import { CheckFunction, CheckReturn, ErrorFunction, ObjectToCheck, Middleware, SuccessFunction, VerySmallCheckFunction, CheckedRequest, CheckedRequestContents, CheckedRequestEntry } from "./types";
+import { CheckFunction, CheckReturn, ErrorFunction, ObjectToCheck, Middleware, SuccessFunction, CheckedRequest, CheckedRequestContents, CheckedRequestEntry } from "./types";
 
 export {
     checkBoolean,
@@ -9,7 +9,8 @@ export {
     checkString,
     SmallCheck,
     chainChecks,
-    chainChecksMiddleware
+    chainChecksMiddleware,
+    chainChecksMiddlewareCustom
 }
 
 export {
@@ -17,8 +18,6 @@ export {
     CheckReturn,
     ErrorFunction,
     SuccessFunction,
-
-    VerySmallCheckFunction,
 
     Middleware,
 
