@@ -31,18 +31,18 @@ type CheckNumberProps = {
 
 function checkNumber({
     key,
-    errorCode=-1,
-    errorMsg="",
-    successCode=0,
-    successMsg="",
+    errorCode = -1,
+    errorMsg = "",
+    successCode = 0,
+    successMsg = "",
     notUndefined,
     notNull,
     isSafe,
     mayBeDecimal,
     isNumber,
     minValue,
-    maxValue}: CheckNumberProps
-): CheckFunction {
+    maxValue
+}: CheckNumberProps): CheckFunction {
     return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
         const toCheck: unknown = jsonObject[key];
 
@@ -51,7 +51,7 @@ function checkNumber({
             return [true, successCode, successMsg];
         } else {
             errorFunction(errorCode, errorMsg, key);
-            return [true, successCode, successMsg];
+            return [false, errorCode, errorMsg];
         }
     }
 }
@@ -67,28 +67,16 @@ function _checkNumber(
     maxValue?: number
 ): boolean {
     if (notUndefined && (toCheck === undefined)) return false;
-
     if (notNull && (toCheck === null)) return false;
 
-    if (isSafe && mayBeDecimal) {
-        const num: number = Number(toCheck);
+    const num: number = Number(toCheck);
+    if (Number.isNaN(num) || !Number.isFinite(num)) return false;
 
-        if (Number.isNaN(num) || (num === Infinity) || (num === -Infinity)) return false;
+    if (isSafe && !Number.isSafeInteger(num)) return false;
+    if (mayBeDecimal && !Number.isInteger(num)) return false;
 
-        if ((num < Number.MIN_SAFE_INTEGER) || (num > Number.MAX_SAFE_INTEGER)) return false;
-
-        if (!Number.isFinite(toCheck)) return false;
-
-    } else {
-        if (isSafe && !Number.isSafeInteger(toCheck)) return false;
-
-        if (mayBeDecimal && !Number.isFinite(toCheck)) return false;
-    }
-
-    if (isNumber && !Number.isInteger(toCheck)) return false;
-
-    if (minValue && (toCheck as number < minValue)) return false;
-    if (maxValue && (toCheck as number > maxValue)) return false;
+    if (minValue !== undefined && num < minValue) return false;
+    if (maxValue !== undefined && num > maxValue) return false;
 
     return true;
 }
@@ -110,15 +98,14 @@ type CheckBooleanProps = {
 
 function checkBoolean({
     key,
-    errorCode=-1,
-    errorMsg="",
-    successCode=0,
-    successMsg="",
+    errorCode = -1,
+    errorMsg = "",
+    successCode = 0,
+    successMsg = "",
     notUndefined,
     notNull,
     isBoolean
-}: CheckBooleanProps
-    ): CheckFunction {
+}: CheckBooleanProps): CheckFunction {
     return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
         const toCheck: unknown = jsonObject[key];
 
@@ -127,7 +114,7 @@ function checkBoolean({
             return [true, successCode, successMsg];
         } else {
             errorFunction(errorCode, errorMsg, key);
-            return [true, successCode, successMsg];
+            return [false, errorCode, errorMsg];
         }
     }
 }
@@ -136,12 +123,10 @@ function _checkBoolean(
     toCheck: unknown,
     notUndefined?: boolean,
     notNull?: boolean,
-    isBoolean?: boolean,
+    isBoolean?: boolean
 ): boolean {
     if (notUndefined && (toCheck === undefined)) return false;
-
     if (notNull && (toCheck === null)) return false;
-
     if (isBoolean && (typeof toCheck !== "boolean")) return false;
 
     return true;
@@ -170,10 +155,10 @@ type CheckStringProps = {
 
 function checkString({
     key,
-    errorCode=-1,
-    errorMsg="",
-    successCode=0,
-    successMsg="",
+    errorCode = -1,
+    errorMsg = "",
+    successCode = 0,
+    successMsg = "",
     notUndefined,
     notNull,
     isString,
@@ -183,8 +168,7 @@ function checkString({
     invalidChars,
     regExpMatch,
     regExpNoMatch
-}: CheckStringProps
-): CheckFunction {
+}: CheckStringProps): CheckFunction {
     return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
         const toCheck: unknown = jsonObject[key];
 
@@ -193,11 +177,20 @@ function checkString({
             return [true, successCode, successMsg];
         } else {
             errorFunction(errorCode, errorMsg, key);
-            return [true, successCode, successMsg];
+            return [false, errorCode, errorMsg];
         }
     }
 }
 
+/**
+ * This function does the actual checking.
+ * The checks are made in the same order as the passed parameters.
+ * As soon as one check fails `false` is returned. If all checks succeeded `true` is returned.
+ * The only parameter that has to be passed is `toCheck`.
+ * If `undefined` or `false` is provided as a value for a check, the check is skipped.
+ * To see what the individual parameters for what you should look out, look at the comment for the function `checkString`.
+ * @returns `true` if all the checks that were supposed to be done succeeded, `false` if a check failed.
+ */
 function _checkString(
     toCheck: unknown,
     notUndefined?: boolean,
@@ -211,28 +204,21 @@ function _checkString(
     regExpNoMatch?: RegExp
 ): boolean {
     if (notUndefined && (toCheck === undefined)) return false;
-
     if (notNull && (toCheck === null)) return false;
-
     if (isString && (typeof toCheck !== "string")) return false;
-
-    if (minLength && ((toCheck as string).length < minLength)) return false;
-    if (maxLength && ((toCheck as string).length > maxLength)) return false;
-
+    if ((minLength !== undefined) && ((toCheck as string).length < minLength)) return false;
+    if ((maxLength !== undefined) && ((toCheck as string).length > maxLength)) return false;
     if (validChars) {
-        for (const letter of toCheck as string) {
+        for (const letter of (toCheck as string)) {
             if (!validChars.includes(letter)) return false;
         }
     }
-
     if (invalidChars) {
-        for (const letter of toCheck as string) {
+        for (const letter of (toCheck as string)) {
             if (invalidChars.includes(letter)) return false;
         }
     }
-
     if (regExpMatch && !regExpMatch.test(toCheck as string)) return false;
-
     if (regExpNoMatch && regExpNoMatch.test(toCheck as string)) return false;
 
     return true;
