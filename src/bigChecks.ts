@@ -50,6 +50,8 @@ type CheckNumberProps = {
  * 
  * @param minValue The minimum value the value that is being checked may have.
  * @param maxValue The maximum value the value that is being checked may have.
+ * 
+ * @returns A tuple consisting of a boolean indicating if the check was successful (`true`) or not, a number which is either the error code if the check failed, otherwise the success code and a string which is either the error message if the check filed, otherwise the success message.
  */
 function checkNumber({
     key,
@@ -142,6 +144,8 @@ type CheckBooleanProps = {
  * 
  * @param allowUndefined If the value that is being checked is undefined, `true` is returned.
  * @param allowNull If the value that is being checked is null, `true` is returned.
+ * 
+ * @returns A tuple consisting of a boolean indicating if the check was successful (`true`) or not, a number which is either the error code if the check failed, otherwise the success code and a string which is either the error message if the check filed, otherwise the success message.
  */
 function checkBoolean({
     key,
@@ -226,6 +230,8 @@ type CheckStringProps = {
  * @param invalidChars A string with characters that the value that is being checked may not contain. If the value that is being checked contains any characters that were specified, `false` is returned.
  * @param regExpMatch The value that is being checked has to match the RegExp, otherwise `false`is returned.
  * @param regExpNoMatch The value that is being checked may not match the RegExp, otherwise `false`is returned.
+ * 
+ * @returns A tuple consisting of a boolean indicating if the check was successful (`true`) or not, a number which is either the error code if the check failed, otherwise the success code and a string which is either the error message if the check filed, otherwise the success message.
  */
 function checkString({
     key,
