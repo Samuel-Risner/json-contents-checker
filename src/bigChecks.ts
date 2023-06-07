@@ -37,7 +37,7 @@ function checkNumber({
     successMsg="",
     notUndefined,
     notNull,
-    isSafe=true,
+    isSafe,
     mayBeDecimal,
     isNumber,
     minValue,
@@ -58,11 +58,11 @@ function checkNumber({
 
 function _checkNumber(
     toCheck: unknown,
-    notUndefined: boolean=true,
-    notNull: boolean=true,
-    isSafe: boolean=true,
-    mayBeDecimal: boolean=false,
-    isNumber: boolean=false,
+    notUndefined?: boolean,
+    notNull?: boolean,
+    isSafe?: boolean,
+    mayBeDecimal?: boolean,
+    isNumber?: boolean,
     minValue?: number,
     maxValue?: number
 ): boolean {
@@ -116,7 +116,7 @@ function checkBoolean({
     successMsg="",
     notUndefined,
     notNull,
-    isBoolean=true
+    isBoolean
 }: CheckBooleanProps
     ): CheckFunction {
     return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
@@ -134,9 +134,9 @@ function checkBoolean({
 
 function _checkBoolean(
     toCheck: unknown,
-    notUndefined: boolean=true,
-    notNull: boolean=true,
-    isBoolean: boolean=false,
+    notUndefined?: boolean,
+    notNull?: boolean,
+    isBoolean?: boolean,
 ): boolean {
     if (notUndefined && (toCheck === undefined)) return false;
 
@@ -176,7 +176,7 @@ function checkString({
     successMsg="",
     notUndefined,
     notNull,
-    isString=true,
+    isString,
     minLength,
     maxLength,
     validChars,
@@ -200,9 +200,9 @@ function checkString({
 
 function _checkString(
     toCheck: unknown,
-    notUndefined: boolean=true,
-    notNull: boolean=true,
-    isString: boolean=false,
+    notUndefined?: boolean,
+    notNull?: boolean,
+    isString?: boolean,
     minLength?: number,
     maxLength?: number,
     validChars?: string,
