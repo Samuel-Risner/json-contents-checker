@@ -1,17 +1,21 @@
 import { CheckFunction } from "./types";
 export default class SmallCheck {
     /**
-     * When the function returned by `combine` is called, this value is used as a key to retrieve the corresponding value from the object passed to the function returned by `combine`.
+     * Used as a key to retrieve the value which is going to be checked.
+     *
      * All the checks that are set will be performed on the retrieved value.
      */
     private key;
     /**
      * An array containing the different check functions that are to be used and their error codes and messages.
+     *
+     * When a check returns `true, it succeeded / everything is ok. If it returns `false`, the check failed / an error occurred.
      */
     private checks;
     constructor(
     /**
-     * When the function returned by `combine` is called, this value is used as a key to retrieve the corresponding value from the object passed to the function returned by `combine`.
+     * Used as a key to retrieve the value which is going to be checked.
+     *
      * All the checks that are set will be performed on the retrieved value.
      */
     key: string);
@@ -25,7 +29,9 @@ export default class SmallCheck {
      */
     private checkCore;
     /**
-     * The check fails if the value does not exist / is `undefined`.
+     * ❌ The check fails if the value does not exist / is `undefined`.
+     *
+     * ✔ The check succeeds if the value is anything other than `undefined`.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -33,7 +39,9 @@ export default class SmallCheck {
      */
     isNotUndefined(errorCode: number, errorMsg: string): this;
     /**
-     * The check fails if the value is `null`.
+     * ❌ The check fails if the value is `null`.
+     *
+     * ✔ The check succeeds if the value is anything other than `null`.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -41,11 +49,13 @@ export default class SmallCheck {
      */
     isNotNull(errorCode: number, errorMsg: string): this;
     /**
-     * The check fails if the value isn't a number or is a finite number.
+     * ❌ The check fails if the value isn't a number or is a finite number.
      *
-     * Valid values: `-10`, `-1.0`, `0`, `5`, `1.0`
+     * ✔ The check succeeds if the value is a non-finite number.
      *
-     * Invalid values: `"0"`, `2.5`, `null`, `undefined`, `true`, `NaN`
+     * ❌ Invalid values: `"0"`, `2.5`, `null`, `undefined`, `true`, `NaN`
+     *
+     * ✔ Valid values: `-10`, `-1.0`, `0`, `5`, `1.0`
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -53,11 +63,13 @@ export default class SmallCheck {
      */
     isNumber(errorCode: number, errorMsg: string): this;
     /**
-     * The check fails if the value isn't a number but succeeds when it is finite.
+     * ❌ The check fails if the value isn't a number.
      *
-     * Valid values: `-10`, `-1.0`, `0`, `5`, `1.0`, `2.5`
+     * ✔ The check succeeds if the value is a finite or non-finite number.
      *
-     * Invalid values: `"0"`, `null`, `undefined`, `true`, `NaN`
+     * ❌ Invalid values: `"0"`, `null`, `undefined`, `true`, `NaN`
+     *
+     * ✔ Valid values: `-10`, `-1.0`, `0`, `5`, `1.0`, `2.5`
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -65,7 +77,9 @@ export default class SmallCheck {
      */
     isFiniteNumber(errorCode: number, errorMsg: string): this;
     /**
-     * The check only succeeds when the value is `NaN`.
+     * ❌ The check fails if the value is not `NaN` (Number.NaN).
+     *
+     * ✔ The check succeeds when the value is `NaN` (Number.NaN).
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -73,13 +87,15 @@ export default class SmallCheck {
      */
     isNaN(errorCode: number, errorMsg: string): this;
     /**
-     * The check fails when the value is not a safe integer.
+     * ❌ The check fails when the value is not a safe integer.
      *
-     * Safe integers range from `-(2^53 - 1)` to `2^53 - 1`.
+     * ✔ The check succeeds if the value is a safe integer.
      *
-     * Valid values: `-10`, `-1.0`, `0`, `5`, `1.0`
+     * ℹ Safe integers range from `-(2^53 - 1)` to `2^53 - 1`.
      *
-     * Invalid values: `"0"`, `2.5`, `null`, `undefined`, `true`, `NaN` (Or when the number is too big or small.)
+     * ❌ Invalid values: `"0"`, `2.5`, `null`, `undefined`, `true`, `NaN` (Or when the number is too big or small.)
+     *
+     * ✔ Valid values: `-10`, `-1.0`, `0`, `5`, `1.0`
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -87,7 +103,9 @@ export default class SmallCheck {
      */
     isSafeNumber(errorCode: number, errorMsg: string): this;
     /**
-     * The check fails when the value is not a string.
+     * ❌ The check fails when the value is not a string.
+     *
+     * ✔ The check succeeds when the value is a string.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -95,7 +113,9 @@ export default class SmallCheck {
      */
     isString(errorCode: number, errorMsg: string): this;
     /**
-     * The check fails when the value is not a boolean.
+     * ❌ The check fails when the value is not a boolean.
+     *
+     * ✔ The check succeeds when the value is a boolean.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -103,9 +123,11 @@ export default class SmallCheck {
      */
     isBoolean(errorCode: number, errorMsg: string): this;
     /**
-     * The check fails when the length of the value is smaller than `minLength`.
+     * ❌ The check fails when the length of the value is smaller than `minLength`.
      *
-     * **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * ✔ The check succeeds when the length of the value is greater than `minLength`.
+     *
+     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -114,9 +136,11 @@ export default class SmallCheck {
      */
     minLength(errorCode: number, errorMsg: string, minLength: number): this;
     /**
-     * The check fails when the length of the value is greater than `maxLength`.
+     * ❌ The check fails when the length of the value is greater than `maxLength`.
      *
-     * **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * ✔ The check succeeds when the length of the value is smaller than `maxLength`.
+     *
+     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -125,9 +149,11 @@ export default class SmallCheck {
      */
     maxLength(errorCode: number, errorMsg: string, maxLength: number): this;
     /**
-     * The check fails when the size of the value is smaller than the `minSize`.
+     * ❌ The check fails when the size of the value is smaller than the `minSize`.
      *
-     * **NOTE:** Before using this check, you should confirm that the value is of type number e.g. use `isNumber` or `isFiniteNumber` or `isSafeNumber`.
+     * ✔ The check succeeds when the size of the value is grater than the `minSize`.
+     *
+     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type number e.g. use `isNumber` or `isFiniteNumber` or `isSafeNumber`.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -136,9 +162,11 @@ export default class SmallCheck {
      */
     minSize(errorCode: number, errorMsg: string, minSize: number): this;
     /**
-     * The check fails when the size of the value is greater than the `minSize`.
+     * ❌ The check fails when the size of the value is greater than the `minSize`.
      *
-     * **NOTE:** Before using this check, you should confirm that the value is of type number e.g. use `isNumber` or `isFiniteNumber` or `isSafeNumber`.
+     * ✔ The check succeeds when the size of the value is smaller than the `minSize`.
+     *
+     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type number e.g. use `isNumber` or `isFiniteNumber` or `isSafeNumber`.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -147,9 +175,11 @@ export default class SmallCheck {
      */
     maxSize(errorCode: number, errorMsg: string, maxSize: number): this;
     /**
-     * The check fails if the value contains any letters that are not in `letters`.
+     * ❌ The check fails if the value contains any letters that are not in `letters`.
      *
-     * **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * ✔ The check succeeds if the value only contains letters that are in `letters`.
+     *
+     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -157,9 +187,11 @@ export default class SmallCheck {
      */
     validLetters(errorCode: number, errorMsg: string, letters: string): this;
     /**
-     * The check fails if the value contains any letters that are in `letters`.
+     * ❌ The check fails if the value contains any letters that are in `letters`.
      *
-     * **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * ✔ The check succeeds if the value does not contain any letters that are in `letters`.
+     *
+     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -167,9 +199,11 @@ export default class SmallCheck {
      */
     invalidLetters(errorCode: number, errorMsg: string, letters: string): this;
     /**
-     * The check fails if the value does not match the provided RegExp `regExp`.
+     * ❌ The check fails if the value does not match the provided RegExp `regExp`.
      *
-     * **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * ✔ The check succeeds if the value matches the provided RegExp `regExp`.
+     *
+     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -177,9 +211,11 @@ export default class SmallCheck {
      */
     regExpMatch(errorCode: number, errorMsg: string, regExp: RegExp): this;
     /**
-     * The check fails if the value matches the provided RegExp `regExp`.
+     * ❌ The check fails if the value matches the provided RegExp `regExp`.
      *
-     * **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * ✔ The check succeeds if the value does not match the provided RegExp `regExp`.
+     *
+     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
