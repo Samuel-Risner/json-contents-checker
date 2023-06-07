@@ -12,7 +12,7 @@ export default class SmallCheck {
          * When the function returned by `combine` is called, this value is used as a key to retrieve the corresponding value from the object passed to the function returned by `combine`.
          * All the checks that are set will be performed on the retrieved value.
          */
-        private nameOfJsonAttribute: string
+        private key: string
     ) {
         this.checks = [];
     }
@@ -288,13 +288,13 @@ export default class SmallCheck {
     combine(successCode: number=0, successMsg: string=""): CheckFunction {
         return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
             for (const checkData of this.checks) {
-                if (checkData[0](objectToCheck[this.nameOfJsonAttribute])) {
-                    errorFunction(checkData[1], checkData[2], this.nameOfJsonAttribute);
+                if (checkData[0](objectToCheck[this.key])) {
+                    errorFunction(checkData[1], checkData[2], this.key);
                     return [false, checkData[1], checkData[2]];
                 }
             }
             
-            successFunction(successCode, successMsg, this.nameOfJsonAttribute);
+            successFunction(successCode, successMsg, this.key);
             return [true, successCode, successMsg];
         };
     }

@@ -4,7 +4,7 @@ export default class SmallCheck {
      * When the function returned by `combine` is called, this value is used as a key to retrieve the corresponding value from the object passed to the function returned by `combine`.
      * All the checks that are set will be performed on the retrieved value.
      */
-    private nameOfJsonAttribute;
+    private key;
     /**
      * An array containing the different check functions that are to be used and their error codes and messages.
      */
@@ -14,7 +14,7 @@ export default class SmallCheck {
      * When the function returned by `combine` is called, this value is used as a key to retrieve the corresponding value from the object passed to the function returned by `combine`.
      * All the checks that are set will be performed on the retrieved value.
      */
-    nameOfJsonAttribute: string);
+    key: string);
     /**
      * Pushes the passed arguments to `this.checks`.
      *
