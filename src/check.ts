@@ -9,7 +9,7 @@ function chainChecks(
     ...checks: CheckFunction[]
 ): () => void {
     return () => {
-        checks.forEach((value: CheckFunction) => {value(jsonObject, successFunction, errorFunction);});
+        checks.forEach((value: CheckFunction) => {value(jsonObject, errorFunction, successFunction);});
     }
 }
 
@@ -28,7 +28,7 @@ function chainChecksMiddleware(
             (req["json-contents-checker"] as CheckedRequestEntry).separateChecks[key] = { code: successCode, msg: successMsg, error: false};
         }
         
-        checks.forEach((value: CheckFunction) => {value(jsonObject, successFunction, errorFunction);});
+        checks.forEach((value: CheckFunction) => {value(jsonObject, errorFunction, successFunction);});
         next();
     }
 }
