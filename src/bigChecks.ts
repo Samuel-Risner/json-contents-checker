@@ -56,6 +56,15 @@ function checkNumber({
     }
 }
 
+/**
+ * This function performs the actual checking for the function `checkNumber`.
+ * The checks are performed in the same order as the passed parameters.
+ * As soon as one check fails, `false` is returned. If all checks that were supposed to be made succeed `true` is returned.
+ * The only required parameter is `toCheck`.
+ * If `undefined` or `false` is provided as a value for a check, that check is skipped.
+ * To understand the purpose and usage of individual parameters, refer to the comment for the `checkNumber` function.
+ * @returns `true` if all the intended checks succeed, `false` if any check fails.
+ */
 function _checkNumber(
     toCheck: unknown,
     notUndefined?: boolean,
@@ -119,6 +128,15 @@ function checkBoolean({
     }
 }
 
+/**
+ * This function performs the actual checking for the function `checkBoolean`.
+ * The checks are performed in the same order as the passed parameters.
+ * As soon as one check fails, `false` is returned. If all checks that were supposed to be made succeed `true` is returned.
+ * The only required parameter is `toCheck`.
+ * If `undefined` or `false` is provided as a value for a check, that check is skipped.
+ * To understand the purpose and usage of individual parameters, refer to the comment for the `checkBoolean` function.
+ * @returns `true` if all the intended checks succeed, `false` if any check fails.
+ */
 function _checkBoolean(
     toCheck: unknown,
     notUndefined?: boolean,
@@ -183,13 +201,13 @@ function checkString({
 }
 
 /**
- * This function does the actual checking.
- * The checks are made in the same order as the passed parameters.
- * As soon as one check fails `false` is returned. If all checks succeeded `true` is returned.
- * The only parameter that has to be passed is `toCheck`.
- * If `undefined` or `false` is provided as a value for a check, the check is skipped.
- * To see what the individual parameters for what you should look out, look at the comment for the function `checkString`.
- * @returns `true` if all the checks that were supposed to be done succeeded, `false` if a check failed.
+ * This function performs the actual checking for the function `checkString`.
+ * The checks are performed in the same order as the passed parameters.
+ * As soon as one check fails, `false` is returned. If all checks that were supposed to be made succeed `true` is returned.
+ * The only required parameter is `toCheck`.
+ * If `undefined` or `false` is provided as a value for a check, that check is skipped.
+ * To understand the purpose and usage of individual parameters, refer to the comment for the `checkString` function.
+ * @returns `true` if all the intended checks succeed, `false` if any check fails.
  */
 function _checkString(
     toCheck: unknown,
