@@ -5,16 +5,16 @@ export {
     checkBoolean,
     checkString,
 
-    CheckNumberProps,
-    CheckBooleanProps,
-    CheckStringProps
+    CheckNumberArgs,
+    CheckBooleanArgs,
+    CheckStringArgs
 }
 
 //
 // - Number
 //
 
-type CheckNumberProps = {
+type CheckNumberArgs = {
     key: string;
     errorCode?: number;
     errorMsg?: string;
@@ -67,7 +67,7 @@ function checkNumber({
     mayBeDecimal,
     minValue,
     maxValue
-}: CheckNumberProps): CheckFunction {
+}: CheckNumberArgs): CheckFunction {
     return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
         const toCheck: unknown = objectToCheck[key];
 
@@ -122,7 +122,7 @@ function _checkNumber(
 // - Boolean
 //
 
-type CheckBooleanProps = {
+type CheckBooleanArgs = {
     key: string;
     errorCode?: number;
     errorMsg?: string;
@@ -155,7 +155,7 @@ function checkBoolean({
     successMsg = "",
     allowUndefined,
     allowNull
-}: CheckBooleanProps): CheckFunction {
+}: CheckBooleanArgs): CheckFunction {
     return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
         const toCheck: unknown = objectToCheck[key];
 
@@ -194,7 +194,7 @@ function _checkBoolean(
 // - String
 //
 
-type CheckStringProps = {
+type CheckStringArgs = {
     key: string;
     errorCode?: number;
     errorMsg?: string;
@@ -247,7 +247,7 @@ function checkString({
     invalidChars,
     regExpMatch,
     regExpNoMatch
-}: CheckStringProps): CheckFunction {
+}: CheckStringArgs): CheckFunction {
     return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
         const toCheck: unknown = objectToCheck[key];
 

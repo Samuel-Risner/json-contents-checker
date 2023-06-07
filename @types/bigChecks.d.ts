@@ -1,6 +1,6 @@
 import { CheckFunction } from "./types";
-export { checkNumber, checkBoolean, checkString, CheckNumberProps, CheckBooleanProps, CheckStringProps };
-type CheckNumberProps = {
+export { checkNumber, checkBoolean, checkString, CheckNumberArgs, CheckBooleanArgs, CheckStringArgs };
+type CheckNumberArgs = {
     key: string;
     errorCode?: number;
     errorMsg?: string;
@@ -38,8 +38,8 @@ type CheckNumberProps = {
  *
  * @returns A tuple consisting of a boolean indicating if the check was successful (`true`) or not, a number which is either the error code if the check failed, otherwise the success code and a string which is either the error message if the check filed, otherwise the success message.
  */
-declare function checkNumber({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull, mayBeNaN, isSafe, mayBeDecimal, minValue, maxValue }: CheckNumberProps): CheckFunction;
-type CheckBooleanProps = {
+declare function checkNumber({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull, mayBeNaN, isSafe, mayBeDecimal, minValue, maxValue }: CheckNumberArgs): CheckFunction;
+type CheckBooleanArgs = {
     key: string;
     errorCode?: number;
     errorMsg?: string;
@@ -63,8 +63,8 @@ type CheckBooleanProps = {
  *
  * @returns A tuple consisting of a boolean indicating if the check was successful (`true`) or not, a number which is either the error code if the check failed, otherwise the success code and a string which is either the error message if the check filed, otherwise the success message.
  */
-declare function checkBoolean({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull }: CheckBooleanProps): CheckFunction;
-type CheckStringProps = {
+declare function checkBoolean({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull }: CheckBooleanArgs): CheckFunction;
+type CheckStringArgs = {
     key: string;
     errorCode?: number;
     errorMsg?: string;
@@ -102,4 +102,4 @@ type CheckStringProps = {
  *
  * @returns A tuple consisting of a boolean indicating if the check was successful (`true`) or not, a number which is either the error code if the check failed, otherwise the success code and a string which is either the error message if the check filed, otherwise the success message.
  */
-declare function checkString({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull, minLength, maxLength, validChars, invalidChars, regExpMatch, regExpNoMatch }: CheckStringProps): CheckFunction;
+declare function checkString({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull, minLength, maxLength, validChars, invalidChars, regExpMatch, regExpNoMatch }: CheckStringArgs): CheckFunction;
