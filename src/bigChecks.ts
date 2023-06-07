@@ -15,7 +15,7 @@ export {
 //
 
 type CheckNumberProps = {
-    nameOfJsonAttribute: string;
+    key: string;
     errorCode?: number;
     errorMsg?: string;
     successCode?: number;
@@ -30,7 +30,7 @@ type CheckNumberProps = {
 }
 
 function checkNumber({
-    nameOfJsonAttribute,
+    key,
     errorCode=-1,
     errorMsg="",
     successCode=0,
@@ -44,13 +44,13 @@ function checkNumber({
     maxValue}: CheckNumberProps
 ): CheckFunction {
     return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
-        const toCheck: unknown = jsonObject[nameOfJsonAttribute];
+        const toCheck: unknown = jsonObject[key];
 
         if (_checkNumber(toCheck, notUndefined, notNull, isSafe, mayBeDecimal, isNumber, minValue, maxValue)) {
-            successFunction(successCode, successMsg);
+            successFunction(successCode, successMsg, key);
             return [true, successCode, successMsg];
         } else {
-            errorFunction(errorCode, errorMsg);
+            errorFunction(errorCode, errorMsg, key);
             return [true, successCode, successMsg];
         }
     }
@@ -98,7 +98,7 @@ function _checkNumber(
 //
 
 type CheckBooleanProps = {
-    nameOfJsonAttribute: string;
+    key: string;
     errorCode?: number;
     errorMsg?: string;
     successCode?: number;
@@ -109,7 +109,7 @@ type CheckBooleanProps = {
 }
 
 function checkBoolean({
-    nameOfJsonAttribute,
+    key,
     errorCode=-1,
     errorMsg="",
     successCode=0,
@@ -120,13 +120,13 @@ function checkBoolean({
 }: CheckBooleanProps
     ): CheckFunction {
     return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
-        const toCheck: unknown = jsonObject[nameOfJsonAttribute];
+        const toCheck: unknown = jsonObject[key];
 
         if (_checkBoolean(toCheck, notUndefined, notNull, isBoolean)) {
-            successFunction(successCode, successMsg);
+            successFunction(successCode, successMsg, key);
             return [true, successCode, successMsg];
         } else {
-            errorFunction(errorCode, errorMsg);
+            errorFunction(errorCode, errorMsg, key);
             return [true, successCode, successMsg];
         }
     }
@@ -152,7 +152,7 @@ function _checkBoolean(
 //
 
 type CheckStringProps = {
-    nameOfJsonAttribute: string;
+    key: string;
     errorCode?: number;
     errorMsg?: string;
     successCode?: number;
@@ -169,7 +169,7 @@ type CheckStringProps = {
 }
 
 function checkString({
-    nameOfJsonAttribute,
+    key,
     errorCode=-1,
     errorMsg="",
     successCode=0,
@@ -186,13 +186,13 @@ function checkString({
 }: CheckStringProps
 ): CheckFunction {
     return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
-        const toCheck: unknown = jsonObject[nameOfJsonAttribute];
+        const toCheck: unknown = jsonObject[key];
 
         if (_checkString(toCheck, notUndefined, notNull, isString, minLength, maxLength, validChars, invalidChars, regExpMatch, regExpNoMatch)) {
-            successFunction(successCode, successMsg);
+            successFunction(successCode, successMsg, key);
             return [true, successCode, successMsg];
         } else {
-            errorFunction(errorCode, errorMsg);
+            errorFunction(errorCode, errorMsg, key);
             return [true, successCode, successMsg];
         }
     }
