@@ -22,31 +22,54 @@ type CheckNumberProps = {
     successMsg?: string;
     notUndefined?: boolean;
     notNull?: boolean;
+    mayBeUndefined?: boolean;
+    mayBeNull?: boolean;
+    mayBeNaN?: boolean;
     isSafe?: boolean;
     mayBeDecimal?: boolean;
-    isNumber?: boolean;
     minValue?: number;
     maxValue?: number;
 }
 
+/**
+ * Checks if the value is a number. You can manipulate the checking by setting parameters to `true`.
+ * 
+ * @param key The key for the value you want to check.
+ * 
+ * @param errorCode The error code which is used if a check fails. Defaults to `-1`.
+ * @param errorMsg The error message which is used if a check fails. Defaults to `""`.
+ * @param successCode The success code which is used if no check fails. Defaults to `0`.
+ * @param successMsg The success message which is used if no check fails. Defaults to `""`.
+ * 
+ * @param mayBeUndefined If the value that is being checked is undefined, `true` is returned.
+ * @param mayBeNull If the value that is being checked is null, `true` is returned.
+ * @param mayBeNaN If the value that is being checked is NaN (Number.NaN) (not a number), `true` is returned.
+ * 
+ * @param isSafe Checks if the value being checked is within the safe integer range (-(2^53 - 1) to 2^53 - 1). Note that decimal numbers will result in `false` being returned unless `mayBeDecimal` is set to true.
+ * @param mayBeDecimal If this is set to `true` numbers may be decimal numbers.
+ * 
+ * @param minValue The minimum value the value that is being checked may have.
+ * @param maxValue The maximum value the value that is being checked may have.
+ */
 function checkNumber({
     key,
     errorCode = -1,
     errorMsg = "",
     successCode = 0,
     successMsg = "",
-    notUndefined,
-    notNull,
+    mayBeUndefined,
+    mayBeNull,
+    mayBeNaN,
+
     isSafe,
     mayBeDecimal,
-    isNumber,
     minValue,
     maxValue
 }: CheckNumberProps): CheckFunction {
     return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
         const toCheck: unknown = jsonObject[key];
 
-        if (_checkNumber(toCheck, notUndefined, notNull, isSafe, mayBeDecimal, isNumber, minValue, maxValue)) {
+        if (_checkNumber(toCheck, mayBeUndefined, mayBeNull, mayBeNaN, isSafe, mayBeDecimal, minValue, maxValue)) {
             successFunction(successCode, successMsg, key);
             return [true, successCode, successMsg];
         } else {
@@ -67,18 +90,20 @@ function checkNumber({
  */
 function _checkNumber(
     toCheck: unknown,
-    notUndefined?: boolean,
-    notNull?: boolean,
+    mayBeUndefined?: boolean,
+    mayBeNull?: boolean,
+    mayBeNaN?: boolean,
     isSafe?: boolean,
     mayBeDecimal?: boolean,
-    isNumber?: boolean,
     minValue?: number,
     maxValue?: number
 ): boolean {
-    if (notUndefined && (toCheck === undefined)) return false;
-    if (notNull && (toCheck === null)) return false;
-
+    if (mayBeUndefined && (toCheck === undefined)) return true;
+    if (mayBeNull && (toCheck === null)) return true;
+    
     const num: number = Number(toCheck);
+    if (mayBeNaN && Number.isNaN(num)) return true;
+
     if (Number.isNaN(num) || !Number.isFinite(num)) return false;
 
     if (isSafe && !Number.isSafeInteger(num)) return false;
@@ -90,7 +115,7 @@ function _checkNumber(
     return true;
 }
 
-//
+// maybe 
 // - Boolean
 //
 
