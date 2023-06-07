@@ -2,6 +2,7 @@ import { CheckBooleanArgs, CheckStringArgs, CheckNumberArgs, checkBoolean, check
 import { chainChecks, chainChecksMiddleware, chainChecksMiddlewareCustom } from "./check";
 import SmallCheck from "./smallCheck";
 import { CheckFunction, CheckReturn, ErrorFunction, ObjectToCheck, Middleware, SuccessFunction, CheckedRequest, CheckedRequestContents, CheckedRequestEntry } from "./types";
+import { errorFunctionDebug, errorFunctionDud, successFunctionDebug, successFunctionDud} from "./funcs";
 
 export {
     checkBoolean,
@@ -10,7 +11,11 @@ export {
     SmallCheck,
     chainChecks,
     chainChecksMiddleware,
-    chainChecksMiddlewareCustom
+    chainChecksMiddlewareCustom,
+    errorFunctionDebug,
+    successFunctionDebug,
+    errorFunctionDud,
+    successFunctionDud
 }
 
 export {
