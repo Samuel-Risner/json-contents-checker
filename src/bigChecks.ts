@@ -22,8 +22,8 @@ type CheckNumberProps = {
     successMsg?: string;
     notUndefined?: boolean;
     notNull?: boolean;
-    mayBeUndefined?: boolean;
-    mayBeNull?: boolean;
+    allowUndefined?: boolean;
+    allowNull?: boolean;
     mayBeNaN?: boolean;
     isSafe?: boolean;
     mayBeDecimal?: boolean;
@@ -41,8 +41,8 @@ type CheckNumberProps = {
  * @param successCode The success code which is used if no check fails. Defaults to `0`.
  * @param successMsg The success message which is used if no check fails. Defaults to `""`.
  * 
- * @param mayBeUndefined If the value that is being checked is undefined, `true` is returned.
- * @param mayBeNull If the value that is being checked is null, `true` is returned.
+ * @param allowUndefined If the value that is being checked is undefined, `true` is returned.
+ * @param allowNull If the value that is being checked is null, `true` is returned.
  * @param mayBeNaN If the value that is being checked is NaN (Number.NaN) (not a number), `true` is returned.
  * 
  * @param isSafe Checks if the value being checked is within the safe integer range (-(2^53 - 1) to 2^53 - 1). Note that decimal numbers will result in `false` being returned unless `mayBeDecimal` is set to true.
@@ -57,8 +57,8 @@ function checkNumber({
     errorMsg = "",
     successCode = 0,
     successMsg = "",
-    mayBeUndefined,
-    mayBeNull,
+    allowUndefined,
+    allowNull,
     mayBeNaN,
 
     isSafe,
@@ -69,7 +69,7 @@ function checkNumber({
     return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
         const toCheck: unknown = jsonObject[key];
 
-        if (_checkNumber(toCheck, mayBeUndefined, mayBeNull, mayBeNaN, isSafe, mayBeDecimal, minValue, maxValue)) {
+        if (_checkNumber(toCheck, allowUndefined, allowNull, mayBeNaN, isSafe, mayBeDecimal, minValue, maxValue)) {
             successFunction(successCode, successMsg, key);
             return [true, successCode, successMsg];
         } else {
@@ -86,20 +86,21 @@ function checkNumber({
  * The only required parameter is `toCheck`.
  * If `undefined` or `false` is provided as a value for a check, that check is skipped.
  * To understand the purpose and usage of individual parameters, refer to the comment for the `checkNumber` function.
+ * 
  * @returns `true` if all the intended checks succeed, `false` if any check fails.
  */
 function _checkNumber(
     toCheck: unknown,
-    mayBeUndefined?: boolean,
-    mayBeNull?: boolean,
+    allowUndefined?: boolean,
+    allowNull?: boolean,
     mayBeNaN?: boolean,
     isSafe?: boolean,
     mayBeDecimal?: boolean,
     minValue?: number,
     maxValue?: number
 ): boolean {
-    if (mayBeUndefined && (toCheck === undefined)) return true;
-    if (mayBeNull && (toCheck === null)) return true;
+    if (allowUndefined && (toCheck === undefined)) return true;
+    if (allowNull && (toCheck === null)) return true;
     
     const num: number = Number(toCheck);
     if (mayBeNaN && Number.isNaN(num)) return true;
@@ -125,25 +126,36 @@ type CheckBooleanProps = {
     errorMsg?: string;
     successCode?: number;
     successMsg?: string;
-    notUndefined?: boolean;
-    notNull?: boolean;
-    isBoolean?: boolean;
+    allowUndefined?: boolean;
+    allowNull?: boolean;
 }
 
+/**
+ * Checks if the value is a boolean. You can manipulate the checking by setting parameters to `true`.
+ * 
+ * @param key The key for the value you want to check.
+ * 
+ * @param errorCode The error code which is used if a check fails. Defaults to `-1`.
+ * @param errorMsg The error message which is used if a check fails. Defaults to `""`.
+ * @param successCode The success code which is used if no check fails. Defaults to `0`.
+ * @param successMsg The success message which is used if no check fails. Defaults to `""`.
+ * 
+ * @param allowUndefined If the value that is being checked is undefined, `true` is returned.
+ * @param allowNull If the value that is being checked is null, `true` is returned.
+ */
 function checkBoolean({
     key,
     errorCode = -1,
     errorMsg = "",
     successCode = 0,
     successMsg = "",
-    notUndefined,
-    notNull,
-    isBoolean
+    allowUndefined,
+    allowNull
 }: CheckBooleanProps): CheckFunction {
     return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
         const toCheck: unknown = jsonObject[key];
 
-        if (_checkBoolean(toCheck, notUndefined, notNull, isBoolean)) {
+        if (_checkBoolean(toCheck, allowUndefined, allowNull)) {
             successFunction(successCode, successMsg, key);
             return [true, successCode, successMsg];
         } else {
@@ -160,19 +172,18 @@ function checkBoolean({
  * The only required parameter is `toCheck`.
  * If `undefined` or `false` is provided as a value for a check, that check is skipped.
  * To understand the purpose and usage of individual parameters, refer to the comment for the `checkBoolean` function.
+ * 
  * @returns `true` if all the intended checks succeed, `false` if any check fails.
  */
 function _checkBoolean(
     toCheck: unknown,
-    notUndefined?: boolean,
-    notNull?: boolean,
-    isBoolean?: boolean
+    allowUndefined?: boolean,
+    allowNull?: boolean
 ): boolean {
-    if (notUndefined && (toCheck === undefined)) return false;
-    if (notNull && (toCheck === null)) return false;
-    if (isBoolean && (typeof toCheck !== "boolean")) return false;
+    if (allowUndefined && (toCheck === undefined)) return true;
+    if (allowNull && (toCheck === null)) return true;
 
-    return true;
+    return typeof toCheck === "boolean";
 }
 
 //
@@ -185,9 +196,8 @@ type CheckStringProps = {
     errorMsg?: string;
     successCode?: number;
     successMsg?: string;
-    notUndefined?: boolean;
-    notNull?: boolean;
-    isString?: boolean;
+    allowUndefined?: boolean;
+    allowNull?: boolean;
     minLength?: number;
     maxLength?: number;
     validChars?: string;
@@ -196,15 +206,35 @@ type CheckStringProps = {
     regExpNoMatch?: RegExp;
 }
 
+/**
+ * Checks if the value is a string. You can manipulate the checking by setting parameters to `true`.
+ * 
+ * @param key The key for the value you want to check.
+ * 
+ * @param errorCode The error code which is used if a check fails. Defaults to `-1`.
+ * @param errorMsg The error message which is used if a check fails. Defaults to `""`.
+ * @param successCode The success code which is used if no check fails. Defaults to `0`.
+ * @param successMsg The success message which is used if no check fails. Defaults to `""`.
+ * 
+ * @param allowUndefined If the value that is being checked is undefined, `true` is returned.
+ * @param allowNull If the value that is being checked is null, `true` is returned.
+ * 
+ * @param minLength The minimum length the value that is being checked may have.
+ * @param maxValue The maximum length the value that is being checked may have.
+ * 
+ * @param validChars A string with characters that the value that is being checked may contain. If the value that is being checked contains any other characters, `false` is returned.
+ * @param invalidChars A string with characters that the value that is being checked may not contain. If the value that is being checked contains any characters that were specified, `false` is returned.
+ * @param regExpMatch The value that is being checked has to match the RegExp, otherwise `false`is returned.
+ * @param regExpNoMatch The value that is being checked may not match the RegExp, otherwise `false`is returned.
+ */
 function checkString({
     key,
     errorCode = -1,
     errorMsg = "",
     successCode = 0,
     successMsg = "",
-    notUndefined,
-    notNull,
-    isString,
+    allowUndefined,
+    allowNull,
     minLength,
     maxLength,
     validChars,
@@ -215,7 +245,7 @@ function checkString({
     return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
         const toCheck: unknown = jsonObject[key];
 
-        if (_checkString(toCheck, notUndefined, notNull, isString, minLength, maxLength, validChars, invalidChars, regExpMatch, regExpNoMatch)) {
+        if (_checkString(toCheck, allowUndefined, allowNull, minLength, maxLength, validChars, invalidChars, regExpMatch, regExpNoMatch)) {
             successFunction(successCode, successMsg, key);
             return [true, successCode, successMsg];
         } else {
@@ -232,13 +262,13 @@ function checkString({
  * The only required parameter is `toCheck`.
  * If `undefined` or `false` is provided as a value for a check, that check is skipped.
  * To understand the purpose and usage of individual parameters, refer to the comment for the `checkString` function.
+ * 
  * @returns `true` if all the intended checks succeed, `false` if any check fails.
  */
 function _checkString(
     toCheck: unknown,
-    notUndefined?: boolean,
-    notNull?: boolean,
-    isString?: boolean,
+    allowUndefined?: boolean,
+    allowNull?: boolean,
     minLength?: number,
     maxLength?: number,
     validChars?: string,
@@ -246,9 +276,9 @@ function _checkString(
     regExpMatch?: RegExp,
     regExpNoMatch?: RegExp
 ): boolean {
-    if (notUndefined && (toCheck === undefined)) return false;
-    if (notNull && (toCheck === null)) return false;
-    if (isString && (typeof toCheck !== "string")) return false;
+    if (allowUndefined && (toCheck === undefined)) return true;
+    if (allowNull && (toCheck === null)) return true;
+    if (typeof toCheck !== "string") return false;
     if ((minLength !== undefined) && ((toCheck as string).length < minLength)) return false;
     if ((maxLength !== undefined) && ((toCheck as string).length > maxLength)) return false;
     if (validChars) {
