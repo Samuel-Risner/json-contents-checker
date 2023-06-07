@@ -1,4 +1,4 @@
-import { CheckFunction, CheckReturn, ErrorFunction, JsonObject, SuccessFunction } from "./types";
+import { CheckFunction, CheckReturn, ErrorFunction, ObjectToCheck, SuccessFunction } from "./types";
 
 export {
     checkNumber,
@@ -68,8 +68,8 @@ function checkNumber({
     minValue,
     maxValue
 }: CheckNumberProps): CheckFunction {
-    return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
-        const toCheck: unknown = jsonObject[key];
+    return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
+        const toCheck: unknown = objectToCheck[key];
 
         if (_checkNumber(toCheck, allowUndefined, allowNull, mayBeNaN, isSafe, mayBeDecimal, minValue, maxValue)) {
             successFunction(successCode, successMsg, key);
@@ -156,8 +156,8 @@ function checkBoolean({
     allowUndefined,
     allowNull
 }: CheckBooleanProps): CheckFunction {
-    return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
-        const toCheck: unknown = jsonObject[key];
+    return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
+        const toCheck: unknown = objectToCheck[key];
 
         if (_checkBoolean(toCheck, allowUndefined, allowNull)) {
             successFunction(successCode, successMsg, key);
@@ -248,8 +248,8 @@ function checkString({
     regExpMatch,
     regExpNoMatch
 }: CheckStringProps): CheckFunction {
-    return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
-        const toCheck: unknown = jsonObject[key];
+    return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
+        const toCheck: unknown = objectToCheck[key];
 
         if (_checkString(toCheck, allowUndefined, allowNull, minLength, maxLength, validChars, invalidChars, regExpMatch, regExpNoMatch)) {
             successFunction(successCode, successMsg, key);

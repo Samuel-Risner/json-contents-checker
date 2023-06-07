@@ -1,4 +1,4 @@
-import { CheckFunction, CheckReturn, ErrorFunction, JsonObject, SuccessFunction, VerySmallCheckFunction } from "./types";
+import { CheckFunction, CheckReturn, ErrorFunction, SuccessFunction, VerySmallCheckFunction, ObjectToCheck } from "./types";
 
 export default class SmallCheck {
 
@@ -286,9 +286,9 @@ export default class SmallCheck {
      * @returns A function which when called with the object you want to check returns tuple containing `true` if the checks were successful, otherwise false. A code indicating the success or failure, the failure codes were specified with the single checks, the success one with the creation of this object. And a success or failure message, the failure messages were specified with the single checks, the success one with the creation of this object.
      */
     combine(successCode: number=0, successMsg: string=""): CheckFunction {
-        return (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
+        return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
             for (const checkData of this.checks) {
-                if (checkData[0](jsonObject[this.nameOfJsonAttribute])) {
+                if (checkData[0](objectToCheck[this.nameOfJsonAttribute])) {
                     errorFunction(checkData[1], checkData[2], this.nameOfJsonAttribute);
                     return [false, checkData[1], checkData[2]];
                 }

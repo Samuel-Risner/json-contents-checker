@@ -1,18 +1,15 @@
 import { NextFunction, Request, Response } from "express";
 
+type ObjectToCheck = { [key: string]: any; };
 type CheckReturn = [boolean, number, string];
 type ErrorFunction = (errorCode: number, errorMsg: string, key: string) => void;
 type SuccessFunction = (successCode: number, successMsg: string, key: string) => void;
-type JsonObject = { [key: string]: any; };
 
-// type SmallCheckFunction = (jsonObject: { [key: string]: any }) => CheckReturn;
 type VerySmallCheckFunction = (toCheck: any) => boolean;
-
-// type BigCheckFunction = (jsonObject: JsonObject, successFunction: SuccessFunction, errorFunction: ErrorFunction) => CheckReturn;
 
 type Middleware = (req: CheckedRequest, res: Response, next: NextFunction) => void;
 
-type CheckFunction = (jsonObject: JsonObject, errorFunction: ErrorFunction, successFunction: SuccessFunction) => CheckReturn;
+type CheckFunction = (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction) => CheckReturn;
 
 type CheckedRequestEntry = {
     error: boolean;
@@ -31,10 +28,10 @@ interface CheckedRequestContents {
 type CheckedRequest = Request & CheckedRequestContents;
 
 export {
+    ObjectToCheck,
     CheckReturn,
     ErrorFunction,
     SuccessFunction,
-    JsonObject,
 
     VerySmallCheckFunction,
 

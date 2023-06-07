@@ -1,7 +1,7 @@
 import { CheckBooleanProps, CheckStringProps, CheckNumberProps, checkBoolean, checkNumber, checkString} from "./bigChecks";
 import { chainChecks, chainChecksMiddleware } from "./check";
 import SmallCheck from "./smallCheck";
-import { CheckFunction, CheckReturn, ErrorFunction, JsonObject, Middleware, SuccessFunction, VerySmallCheckFunction, CheckedRequest, CheckedRequestContents, CheckedRequestEntry } from "./types";
+import { CheckFunction, CheckReturn, ErrorFunction, ObjectToCheck, Middleware, SuccessFunction, VerySmallCheckFunction, CheckedRequest, CheckedRequestContents, CheckedRequestEntry } from "./types";
 
 export {
     checkBoolean,
@@ -13,10 +13,10 @@ export {
 }
 
 export {
+    ObjectToCheck,
     CheckReturn,
     ErrorFunction,
     SuccessFunction,
-    JsonObject,
 
     VerySmallCheckFunction,
 

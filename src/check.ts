@@ -1,20 +1,20 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 
-import { CheckFunction, CheckedRequest, CheckedRequestEntry, ErrorFunction, JsonObject, Middleware, SuccessFunction } from "./types";
+import { CheckFunction, CheckedRequest, CheckedRequestEntry, ErrorFunction, Middleware, SuccessFunction, ObjectToCheck } from "./types";
 
 function chainChecks(
     errorFunction: ErrorFunction,
     successFunction: SuccessFunction,
-    jsonObject: JsonObject,
+    objectToCheck: ObjectToCheck,
     ...checks: CheckFunction[]
 ): () => void {
     return () => {
-        checks.forEach((value: CheckFunction) => {value(jsonObject, errorFunction, successFunction);});
+        checks.forEach((value: CheckFunction) => {value(objectToCheck, errorFunction, successFunction);});
     }
 }
 
 function chainChecksMiddleware(
-    jsonObject: JsonObject,
+    objectToCheck: ObjectToCheck,
     ...checks: CheckFunction[]
 ): Middleware {
     return (req: CheckedRequest, res: Response, next: NextFunction) => {
@@ -28,7 +28,7 @@ function chainChecksMiddleware(
             (req["json-contents-checker"] as CheckedRequestEntry).separateChecks[key] = { code: successCode, msg: successMsg, error: false};
         }
         
-        checks.forEach((value: CheckFunction) => {value(jsonObject, errorFunction, successFunction);});
+        checks.forEach((value: CheckFunction) => {value(objectToCheck, errorFunction, successFunction);});
         next();
     }
 }
