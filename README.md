@@ -1,25 +1,15 @@
 # json-contents-checker
 
-A npm package (for express.js) for checking the contents of a json object.
+A npm package (for ExpressJS) for checking the contents of an object which was parsed from a json string.
 
-# Install
+Wiki: https://github.com/Samuel-Risner/json-contents-checker/wiki
+
+GitHub repo: https://github.com/Samuel-Risner/json-contents-checker
+
+npm package: https://www.npmjs.com/package/@samuel-risner/json-contents-checker
+
+# Installation
 
 ```shell
 npm i @samuel-risner/json-contents-checker
 ```
-
-# Changelog
-
-# 1.0.0 - Testing Version
-
-## 1.0.2
-
-Updated the compiler Options in the "tsconfig.json" file
-
-## 1.0.1
-
-Fixed the path to the "@types" file
-
-## 1.0.0
-
-Initial testing function
