@@ -34,11 +34,11 @@ function chainChecksMiddleware(
 }
 
 function chainChecksMiddlewareCustom(
-    getObjectToCheck?: (req: CheckedRequest, res: Response) => ObjectToCheck,
+    getObjectToCheck: (req: CheckedRequest, res: Response) => ObjectToCheck,
     ...checks: CheckFunction[]
 ): Middleware {
     return (req: CheckedRequest, res: Response, next: NextFunction) => {
-        const objectToCheck: ObjectToCheck = getObjectToCheck? getObjectToCheck(req, res) : req.body;
+        const objectToCheck: ObjectToCheck = getObjectToCheck(req, res);
 
         if (!req["json-contents-checker"]) req["json-contents-checker"] = {error: false, separateChecks: {}};
 
