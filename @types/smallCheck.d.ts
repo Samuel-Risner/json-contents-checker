@@ -127,7 +127,7 @@ export default class SmallCheck {
      *
      * ✔ The check succeeds when the length of the value is greater than `minLength`.
      *
-     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * ❗ **NOTE: Before using this check, you should confirm that the value is of type string e.g. use `isString`.**
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -140,7 +140,7 @@ export default class SmallCheck {
      *
      * ✔ The check succeeds when the length of the value is smaller than `maxLength`.
      *
-     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * ❗ **NOTE: Before using this check, you should confirm that the value is of type string e.g. use `isString`.**
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -153,7 +153,7 @@ export default class SmallCheck {
      *
      * ✔ The check succeeds when the size of the value is grater than the `minSize`.
      *
-     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type number e.g. use `isNumber` or `isFiniteNumber` or `isSafeNumber`.
+     * ❗ **NOTE: Before using this check, you should confirm that the value is of type number e.g. use `isNumber` or `isFiniteNumber` or `isSafeNumber`.**
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -166,7 +166,7 @@ export default class SmallCheck {
      *
      * ✔ The check succeeds when the size of the value is smaller than the `minSize`.
      *
-     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type number e.g. use `isNumber` or `isFiniteNumber` or `isSafeNumber`.
+     * ❗ **NOTE: Before using this check, you should confirm that the value is of type number e.g. use `isNumber` or `isFiniteNumber` or `isSafeNumber`.**
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -179,7 +179,7 @@ export default class SmallCheck {
      *
      * ✔ The check succeeds if the value only contains letters that are in `letters`.
      *
-     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * ❗ **NOTE: Before using this check, you should confirm that the value is of type string e.g. use `isString`.**
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -191,7 +191,7 @@ export default class SmallCheck {
      *
      * ✔ The check succeeds if the value does not contain any letters that are in `letters`.
      *
-     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * ❗ **NOTE: Before using this check, you should confirm that the value is of type string e.g. use `isString`.**
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -203,7 +203,7 @@ export default class SmallCheck {
      *
      * ✔ The check succeeds if the value matches the provided RegExp `regExp`.
      *
-     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * ❗ **NOTE: Before using this check, you should confirm that the value is of type string e.g. use `isString`.**
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -215,7 +215,7 @@ export default class SmallCheck {
      *
      * ✔ The check succeeds if the value does not match the provided RegExp `regExp`.
      *
-     * ❗ **NOTE:** Before using this check, you should confirm that the value is of type string e.g. use `isString`.
+     * ❗ **NOTE: Before using this check, you should confirm that the value is of type string e.g. use `isString`.**
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
