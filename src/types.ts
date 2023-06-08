@@ -21,6 +21,7 @@ type CheckedRequestEntry = {
         };
     };
 }
+
 interface CheckedRequestContents {
     "json-contents-checker"?: CheckedRequestEntry;
 }

@@ -12,6 +12,7 @@ function chainChecks(
         checks.forEach((value: CheckFunction) => {value(objectToCheck, errorFunction, successFunction);});
     }
 }
+
 function chainChecksMiddleware(
     ...checks: CheckFunction[]
 ): Middleware {
