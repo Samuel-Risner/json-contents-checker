@@ -93,6 +93,8 @@ export default class SmallCheck {
      *
      * ℹ Safe integers range from `-(2^53 - 1)` to `2^53 - 1`.
      *
+     * ℹ You can access the greatest possible safe number by using `Number.MAX_SAFE_INTEGER` and the smallest one by using `Number.MIN_SAFE_INTEGER`.
+     *
      * ❌ Invalid values: `"0"`, `2.5`, `null`, `undefined`, `true`, `NaN` (Or when the number is too big or small.)
      *
      * ✔ Valid values: `-10`, `-1.0`, `0`, `5`, `1.0`
