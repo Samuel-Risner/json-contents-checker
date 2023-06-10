@@ -219,7 +219,7 @@ export default class SmallCheck {
      */
     minSize(errorCode: number, errorMsg: string, minSize: number): this {
         return this.checkCore(errorCode, errorMsg, (toCheck: number): boolean => {
-            return toCheck > minSize;
+            return toCheck >= minSize;
         })
     }
 
@@ -237,7 +237,7 @@ export default class SmallCheck {
      */
     maxSize(errorCode: number, errorMsg: string, maxSize: number): this {
         return this.checkCore(errorCode, errorMsg, (toCheck: number): boolean => {
-            return toCheck < maxSize;
+            return toCheck <= maxSize;
         })
     }
 
