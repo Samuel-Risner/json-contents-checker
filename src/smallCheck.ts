@@ -183,7 +183,7 @@ export default class SmallCheck {
      */
     minLength(errorCode: number, errorMsg: string, minLength: number): this {
         return this.checkCore(errorCode, errorMsg, (toCheck: string): boolean => {
-            return toCheck.length > minLength;
+            return toCheck.length >= minLength;
         })
     }
 
@@ -201,7 +201,7 @@ export default class SmallCheck {
      */
     maxLength(errorCode: number, errorMsg: string, maxLength: number): this {
         return this.checkCore(errorCode, errorMsg, (toCheck: string): boolean => {
-            return toCheck.length < maxLength;
+            return toCheck.length <= maxLength;
         })
     }
 
