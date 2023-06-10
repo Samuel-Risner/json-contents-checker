@@ -197,6 +197,32 @@ const testVariations: TestVariant[] = [
             .isNotUndefined(-1, "-1")
             .combine()(mockObject, errorFunction, successFunction);
         }
+    },{
+        "namePart": "isNumber",
+        "expectedOutputs": [
+            [false, -1, "-1"], // "some string"
+            [false, -1, "-1"], // ""
+            [false, -1, "-1"], // "some very very not too long string"
+            [true, 0, ""], // 0
+            [true, 0, ""], // 875
+            [true, 0, ""], // -98
+            [false, -1, "-1"], // 2.987
+            [false, -1, "-1"], // -98.979
+            [false, -1, "-1"], // true
+            [false, -1, "-1"], // false
+            [false, -1, "-1"], // undefined
+            [false, -1, "-1"], // null
+            [false, -1, "-1"], // Number.NaN
+            [true, 0, ""], // Number.MAX_SAFE_INTEGER
+            [true, 0, ""], // Number.MIN_SAFE_INTEGER
+            [true, 0, ""], // Number.MAX_SAFE_INTEGER + 1
+            [true, 0, ""], // Number.MIN_SAFE_INTEGER - 1
+        ],
+        "func": (key: string): CheckReturn => {
+            return new SmallCheck(key)
+            .isNumber(-1, "-1")
+            .combine()(mockObject, errorFunction, successFunction);
+        }
     },
 ];
 
