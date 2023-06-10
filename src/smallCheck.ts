@@ -253,7 +253,7 @@ export default class SmallCheck {
     validLetters(errorCode: number, errorMsg: string, letters: string): this {
         return this.checkCore(errorCode, errorMsg, (toCheck: string): boolean => {
             for (const letter of toCheck) {
-                if (letters.includes(letter)) return false;
+                if (!letters.includes(letter)) return false;
             }
             return true;
         })
@@ -273,7 +273,7 @@ export default class SmallCheck {
     invalidLetters(errorCode: number, errorMsg: string, letters: string): this {
         return this.checkCore(errorCode, errorMsg, (toCheck: string): boolean => {
             for (const letter of toCheck) {
-                if (!letters.includes(letter)) return false;
+                if (letters.includes(letter)) return false;
             }
             return true;
         })
