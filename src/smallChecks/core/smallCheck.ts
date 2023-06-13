@@ -1,22 +1,15 @@
-import { CheckFunction, CheckReturn, ErrorFunction, SuccessFunction, VerySmallCheckFunction, ObjectToCheck } from "./types";
+import { ErrorFunction, SuccessFunction, VerySmallCheckFunction, ObjectToCheck, CheckFunctionOnCheck, CheckFunctionOnCombine, CheckFunctionOnCreation } from "./../../types";
 
-export default class SmallCheck {
+export default abstract class SmallCheckCore {
 
     /**
      * An array containing the different check functions that are to be used and their error codes and messages.
      * 
-     * When a check returns `true, it succeeded / everything is ok. If it returns `false`, the check failed / an error occurred.
+     * When a check returns `true`, it succeeded / everything is ok. If it returns `false`, the check failed / an error occurred.
      */
-    private checks: [VerySmallCheckFunction, number, string][];
+    protected checks: [VerySmallCheckFunction, number, string][];
     
-    constructor(
-        /**
-         * Used as a key to retrieve the value which is going to be checked.
-         * 
-         * All the checks that are set will be performed on the retrieved value.
-         */
-        private key: string
-    ) {
+    constructor() {
         this.checks = [];
     }
 
@@ -315,25 +308,13 @@ export default class SmallCheck {
         })
     }
 
-    /**
-     * Combines all the checks into one function and returns it.
-     * 
-     * @param successCode The code which is reported when all the checks succeeded.
-     * @param successMsg The message which is reported when all the checks succeeded.
-     * @returns A function which when called with the object you want to check returns tuple containing `true` if the checks were successful, otherwise false. A code indicating the success or failure, the failure codes were specified with the single checks, the success one with the creation of this object. And a success or failure message, the failure messages were specified with the single checks, the success one with the creation of this object.
-     */
-    combine(successCode: number=0, successMsg: string=""): CheckFunction {
-        return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
-            for (const checkData of this.checks) {
-                if (!checkData[0](objectToCheck[this.key])) {
-                    errorFunction(checkData[1], checkData[2], this.key);
-                    return [false, checkData[1], checkData[2]];
-                }
-            }
-            
-            successFunction(successCode, successMsg, this.key);
-            return [true, successCode, successMsg];
-        };
-    }
+    abstract combine(
+        objectToCheck?: ObjectToCheck,
+        key?: string,
+        successCode?: number,
+        successMsg?: string,
+        errorFunction?: ErrorFunction,
+        successFunction?: SuccessFunction
+    ): CheckFunctionOnCheck | CheckFunctionOnCombine | CheckFunctionOnCreation;
 
 }
