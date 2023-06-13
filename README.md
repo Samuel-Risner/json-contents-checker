@@ -4,16 +4,40 @@ A npm package (for express.js) for checking the contents of a json object.
 
 # Setup
 
+Install the stuff:
+
+```shell
+npm install
+```
+
 Go to the folder that contains the "main" branch and run:
 
 ```shell
 npm link
 ```
 
+(Linux:)
+
+```shell
+sudo npm link
+```
+
 Then go to the folder that contains the "testing" branch and run:
 
 ```shell
 npm link @samuel-risner/json-contents-checker
+```
+
+(Linux:)
+
+```shell
+sudo npm link @samuel-risner/json-contents-checker
+```
+
+# Do tests
+
+```shell
+npm test
 ```
 
 <!--
