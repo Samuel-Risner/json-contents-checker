@@ -19,8 +19,8 @@ const errorFunctionDud: ErrorFunction = (errorCode: number, errorMsg: string, ke
 const successFunctionDud: SuccessFunction = (successCode: number, successMsg: string, key: string): void => {}
 
 export {
-    successFunctionDebug,
     errorFunctionDebug,
-    successFunctionDud,
-    errorFunctionDud
+    successFunctionDebug,
+    errorFunctionDud,
+    successFunctionDud
 }
