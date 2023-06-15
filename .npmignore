@@ -1,0 +1,5 @@
+.vscode/
+src/
+.gitattributes
+README.md
+tsconfig.json
