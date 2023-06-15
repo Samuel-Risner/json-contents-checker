@@ -1,6 +1,6 @@
 import SmallCheckCore from "./smallCheckCore";
 import { errorFunctionDud, successFunctionDud } from "./../funcs";
-import { ObjectToCheck, ErrorFunction, SuccessFunction, CheckReturn, CheckFunctionOnCreation, SmallCheckArgs, CheckFunctionChain } from "./../types";
+import { ObjectToCheck, ErrorFunction, SuccessFunction, CheckReturn, CheckFunctionPreCheck, SmallCheckArgs, CheckFunctionChain } from "./../types";
 
 export default class SmallCheckOnCreation extends SmallCheckCore {
 
@@ -22,17 +22,9 @@ export default class SmallCheckOnCreation extends SmallCheckCore {
         this.successFunction = successFunction;
     }
 
-    combine(): CheckFunctionOnCreation {
+    combine(): CheckFunctionPreCheck {
         return (): CheckReturn => {
-            for (const checkData of this.checks) {
-                if (!checkData[0](this.objectToCheck[this.key])) {
-                    this.errorFunction(checkData[1], checkData[2], this.key);
-                    return [false, checkData[1], checkData[2]];
-                }
-            }
-            
-            this.successFunction(this.successCode, this.successMsg, this.key);
-            return [true, this.successCode, this.successMsg];
+            return super.evaluateChecks(this.objectToCheck, this.key, this.successCode, this.successMsg, this.errorFunction, this.successFunction);
         };
     }
 

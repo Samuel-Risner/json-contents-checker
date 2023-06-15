@@ -1,4 +1,4 @@
-import { ErrorFunction, SuccessFunction, VerySmallCheckFunction, ObjectToCheck, CheckFunctionOnCheck, CheckFunctionOnCombine, CheckFunctionOnCreation, CheckFunctionChain } from "./../types";
+import { ErrorFunction, SuccessFunction, VerySmallCheckFunction, ObjectToCheck, CheckFunctionOnCheck, CheckFunctionPreCheck, CheckFunctionChain, CheckReturn } from "./../types";
 export default abstract class SmallCheckCore {
     /**
      * An array containing the different check functions that are to be used and their error codes and messages.
@@ -212,6 +212,7 @@ export default abstract class SmallCheckCore {
      * @param regExp The RegExp to which the value should not match.
      */
     regExpNoMatch(errorCode: number, errorMsg: string, regExp: RegExp): this;
-    abstract combine(objectToCheck?: ObjectToCheck, key?: string, successCode?: number, successMsg?: string, errorFunction?: ErrorFunction, successFunction?: SuccessFunction): CheckFunctionOnCheck | CheckFunctionOnCombine | CheckFunctionOnCreation;
+    protected evaluateChecks(objectToCheck: ObjectToCheck, key: string, successCode: number, successMsg: string, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn;
+    combine(objectToCheck: ObjectToCheck, key: string, successCode: number, successMsg: string, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckFunctionPreCheck | CheckFunctionOnCheck;
     combineChain(key: string, successCode?: number, successMsg?: string): CheckFunctionChain;
 }

@@ -11,8 +11,7 @@ type Middleware = (req: CheckedRequest, res: Response, next: NextFunction) => vo
 
 type CheckFunctionChain = (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction) => CheckReturn;
 type CheckFunctionOnCheck = (smallCheckArgs: SmallCheckArgs) => CheckReturn;
-type CheckFunctionOnCombine = () => CheckReturn;
-type CheckFunctionOnCreation = () => CheckReturn;
+type CheckFunctionPreCheck = () => CheckReturn;
 
 type SmallCheckArgs = {
     objectToCheck: ObjectToCheck;
@@ -52,8 +51,7 @@ export {
 
     CheckFunctionChain,
     CheckFunctionOnCheck,
-    CheckFunctionOnCombine,
-    CheckFunctionOnCreation,
+    CheckFunctionPreCheck,
 
     SmallCheckArgs,
 

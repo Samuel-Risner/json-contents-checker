@@ -55,8 +55,7 @@ import {
 
     CheckFunctionChain,
     CheckFunctionOnCheck,
-    CheckFunctionOnCombine,
-    CheckFunctionOnCreation,
+    CheckFunctionPreCheck,
 
     SmallCheckArgs,
 
@@ -77,8 +76,7 @@ export {
 
     CheckFunctionChain,
     CheckFunctionOnCheck,
-    CheckFunctionOnCombine,
-    CheckFunctionOnCreation,
+    CheckFunctionPreCheck,
 
     SmallCheckArgs,
 

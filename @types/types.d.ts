@@ -9,8 +9,7 @@ type VerySmallCheckFunction = (toCheck: any) => boolean;
 type Middleware = (req: CheckedRequest, res: Response, next: NextFunction) => void;
 type CheckFunctionChain = (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction) => CheckReturn;
 type CheckFunctionOnCheck = (smallCheckArgs: SmallCheckArgs) => CheckReturn;
-type CheckFunctionOnCombine = () => CheckReturn;
-type CheckFunctionOnCreation = () => CheckReturn;
+type CheckFunctionPreCheck = () => CheckReturn;
 type SmallCheckArgs = {
     objectToCheck: ObjectToCheck;
     key: string;
@@ -33,4 +32,4 @@ interface CheckedRequestContents {
     "json-contents-checker"?: CheckedRequestEntry;
 }
 type CheckedRequest = Request & CheckedRequestContents;
-export { ObjectToCheck, CheckReturn, ErrorFunction, SuccessFunction, VerySmallCheckFunction, Middleware, CheckFunctionChain, CheckFunctionOnCheck, CheckFunctionOnCombine, CheckFunctionOnCreation, SmallCheckArgs, CheckedRequestEntry, CheckedRequestContents, CheckedRequest };
+export { ObjectToCheck, CheckReturn, ErrorFunction, SuccessFunction, VerySmallCheckFunction, Middleware, CheckFunctionChain, CheckFunctionOnCheck, CheckFunctionPreCheck, SmallCheckArgs, CheckedRequestEntry, CheckedRequestContents, CheckedRequest };
