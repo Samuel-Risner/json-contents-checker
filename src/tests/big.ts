@@ -1,6 +1,5 @@
 import tester from "./../tester";
 import mockObject, { amountKeys } from "./mockObject";
-import { errorFunction, successFunction } from "./funcs";
 
 import {
     SmallCheckOnCheck, SmallCheckOnCombine, SmallCheckOnCreation, // Small check classes
