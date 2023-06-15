@@ -10,7 +10,10 @@ export {
 }
 
 // Big checks:
-import { checkBoolean, checkNumber, checkString, CheckBooleanArgs, CheckStringArgs, CheckNumberArgs } from "./bigChecks";
+
+import { CheckBooleanArgs, checkBoolean } from "./bigChecks/boolean";
+import { CheckNumberArgs, checkNumber } from "./bigChecks/number";
+import { CheckStringArgs, checkString } from "./bigChecks/string";
 
 export {
     checkBoolean,
