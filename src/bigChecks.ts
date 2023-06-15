@@ -1,4 +1,4 @@
-import { CheckFunction, CheckReturn, ErrorFunction, ObjectToCheck, SuccessFunction } from "./types";
+import { CheckFunctionChain, CheckReturn, ErrorFunction, ObjectToCheck, SuccessFunction } from "./types";
 
 export {
     checkNumber,
@@ -67,7 +67,7 @@ function checkNumber({
     mayBeDecimal,
     minValue,
     maxValue
-}: CheckNumberArgs): CheckFunction {
+}: CheckNumberArgs): CheckFunctionChain {
     return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
         const toCheck: unknown = objectToCheck[key];
 
@@ -155,7 +155,7 @@ function checkBoolean({
     successMsg = "",
     allowUndefined,
     allowNull
-}: CheckBooleanArgs): CheckFunction {
+}: CheckBooleanArgs): CheckFunctionChain {
     return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
         const toCheck: unknown = objectToCheck[key];
 
@@ -247,7 +247,7 @@ function checkString({
     invalidChars,
     regExpMatch,
     regExpNoMatch
-}: CheckStringArgs): CheckFunction {
+}: CheckStringArgs): CheckFunctionChain {
     return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
         const toCheck: unknown = objectToCheck[key];
 

@@ -1,4 +1,4 @@
-import { CheckFunction } from "./types";
+import { CheckFunctionChain } from "./types";
 export { checkNumber, checkBoolean, checkString, CheckNumberArgs, CheckBooleanArgs, CheckStringArgs };
 type CheckNumberArgs = {
     key: string;
@@ -38,7 +38,7 @@ type CheckNumberArgs = {
  *
  * @returns A tuple consisting of a boolean indicating if the check was successful (`true`) or not, a number which is either the error code if the check failed, otherwise the success code and a string which is either the error message if the check filed, otherwise the success message.
  */
-declare function checkNumber({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull, mayBeNaN, isSafe, mayBeDecimal, minValue, maxValue }: CheckNumberArgs): CheckFunction;
+declare function checkNumber({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull, mayBeNaN, isSafe, mayBeDecimal, minValue, maxValue }: CheckNumberArgs): CheckFunctionChain;
 type CheckBooleanArgs = {
     key: string;
     errorCode?: number;
@@ -63,7 +63,7 @@ type CheckBooleanArgs = {
  *
  * @returns A tuple consisting of a boolean indicating if the check was successful (`true`) or not, a number which is either the error code if the check failed, otherwise the success code and a string which is either the error message if the check filed, otherwise the success message.
  */
-declare function checkBoolean({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull }: CheckBooleanArgs): CheckFunction;
+declare function checkBoolean({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull }: CheckBooleanArgs): CheckFunctionChain;
 type CheckStringArgs = {
     key: string;
     errorCode?: number;
@@ -102,4 +102,4 @@ type CheckStringArgs = {
  *
  * @returns A tuple consisting of a boolean indicating if the check was successful (`true`) or not, a number which is either the error code if the check failed, otherwise the success code and a string which is either the error message if the check filed, otherwise the success message.
  */
-declare function checkString({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull, minLength, maxLength, validChars, invalidChars, regExpMatch, regExpNoMatch }: CheckStringArgs): CheckFunction;
+declare function checkString({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull, minLength, maxLength, validChars, invalidChars, regExpMatch, regExpNoMatch }: CheckStringArgs): CheckFunctionChain;

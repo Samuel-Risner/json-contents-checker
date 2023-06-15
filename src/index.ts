@@ -53,7 +53,7 @@ import {
 
     Middleware,
 
-    CheckFunction,
+    CheckFunctionChain,
     CheckFunctionOnCheck,
     CheckFunctionOnCombine,
     CheckFunctionOnCreation,
@@ -75,7 +75,7 @@ export {
 
     Middleware,
 
-    CheckFunction,
+    CheckFunctionChain,
     CheckFunctionOnCheck,
     CheckFunctionOnCombine,
     CheckFunctionOnCreation,

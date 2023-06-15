@@ -9,7 +9,7 @@ type VerySmallCheckFunction = (toCheck: any) => boolean;
 
 type Middleware = (req: CheckedRequest, res: Response, next: NextFunction) => void;
 
-type CheckFunction = (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction) => CheckReturn;
+type CheckFunctionChain = (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction) => CheckReturn;
 type CheckFunctionOnCheck = (smallCheckArgs: SmallCheckArgs) => CheckReturn;
 type CheckFunctionOnCombine = () => CheckReturn;
 type CheckFunctionOnCreation = () => CheckReturn;
@@ -50,7 +50,7 @@ export {
 
     Middleware,
 
-    CheckFunction,
+    CheckFunctionChain,
     CheckFunctionOnCheck,
     CheckFunctionOnCombine,
     CheckFunctionOnCreation,

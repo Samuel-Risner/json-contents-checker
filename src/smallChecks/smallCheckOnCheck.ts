@@ -1,6 +1,6 @@
 import SmallCheckCore from "./smallCheckCore";
 import { errorFunctionDud, successFunctionDud } from "./../funcs";
-import { CheckFunctionOnCheck, CheckReturn, SmallCheckArgs } from "./../types";
+import { CheckFunctionChain, CheckFunctionOnCheck, CheckReturn, ErrorFunction, ObjectToCheck, SmallCheckArgs, SuccessFunction } from "./../types";
 
 export default class SmallCheckOnCheck extends SmallCheckCore {
 

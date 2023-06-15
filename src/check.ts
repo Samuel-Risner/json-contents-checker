@@ -1,20 +1,20 @@
 import { NextFunction, Response } from "express";
 
-import { CheckFunction, CheckedRequest, CheckedRequestEntry, ErrorFunction, Middleware, SuccessFunction, ObjectToCheck } from "./types";
+import { CheckFunctionChain, CheckedRequest, CheckedRequestEntry, ErrorFunction, Middleware, SuccessFunction, ObjectToCheck } from "./types";
 
 function chainChecks(
     errorFunction: ErrorFunction,
     successFunction: SuccessFunction,
     objectToCheck: ObjectToCheck,
-    ...checks: CheckFunction[]
+    ...checks: CheckFunctionChain[]
 ): () => void {
     return () => {
-        checks.forEach((value: CheckFunction) => {value(objectToCheck, errorFunction, successFunction);});
+        checks.forEach((value: CheckFunctionChain) => {value(objectToCheck, errorFunction, successFunction);});
     }
 }
 
 function chainChecksMiddleware(
-    ...checks: CheckFunction[]
+    ...checks: CheckFunctionChain[]
 ): Middleware {
     return (req: CheckedRequest, res: Response, next: NextFunction) => {
         const objectToCheck: ObjectToCheck = req.body;
@@ -29,14 +29,14 @@ function chainChecksMiddleware(
             (req["json-contents-checker"] as CheckedRequestEntry).separateChecks[key] = { code: successCode, msg: successMsg, error: false};
         }
         
-        checks.forEach((value: CheckFunction) => {value(objectToCheck, errorFunction, successFunction);});
+        checks.forEach((value: CheckFunctionChain) => {value(objectToCheck, errorFunction, successFunction);});
         next();
     }
 }
 
 function chainChecksMiddlewareCustom(
     getObjectToCheck: (req: CheckedRequest, res: Response) => ObjectToCheck,
-    ...checks: CheckFunction[]
+    ...checks: CheckFunctionChain[]
 ): Middleware {
     return (req: CheckedRequest, res: Response, next: NextFunction) => {
         const objectToCheck: ObjectToCheck = getObjectToCheck(req, res);
@@ -51,7 +51,7 @@ function chainChecksMiddlewareCustom(
             (req["json-contents-checker"] as CheckedRequestEntry).separateChecks[key] = { code: successCode, msg: successMsg, error: false};
         }
         
-        checks.forEach((value: CheckFunction) => {value(objectToCheck, errorFunction, successFunction);});
+        checks.forEach((value: CheckFunctionChain) => {value(objectToCheck, errorFunction, successFunction);});
         next();
     }
 }
