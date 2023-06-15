@@ -7,8 +7,7 @@
   "scripts": {
     "build": "tsc -p ./tsconfig.json",
     "prepublish": "tsc -p ./tsconfig.json",
-    "watch_ts": "tsc -p ./tsconfig.json --watch",
-    "start": "node dist/index.js"
+    "watch_ts": "tsc -p ./tsconfig.json --watch"
   },
   "repository": {
     "type": "git",
