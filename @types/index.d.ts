@@ -8,5 +8,5 @@ import { chainChecks, chainChecksMiddleware, chainChecksMiddlewareCustom } from 
 export { chainChecks, chainChecksMiddleware, chainChecksMiddlewareCustom, };
 import { errorFunctionDebug, successFunctionDebug, errorFunctionDud, successFunctionDud } from "./funcs";
 export { errorFunctionDebug, successFunctionDebug, errorFunctionDud, successFunctionDud };
-import { ObjectToCheck, CheckReturn, ErrorFunction, SuccessFunction, Middleware, CheckFunction, CheckFunctionOnCheck, CheckFunctionOnCombine, CheckFunctionOnCreation, CheckedRequestEntry, CheckedRequestContents, CheckedRequest } from "./types";
-export { ObjectToCheck, CheckReturn, ErrorFunction, SuccessFunction, Middleware, CheckFunction, CheckFunctionOnCheck, CheckFunctionOnCombine, CheckFunctionOnCreation, CheckedRequestEntry, CheckedRequestContents, CheckedRequest };
+import { ObjectToCheck, CheckReturn, ErrorFunction, SuccessFunction, Middleware, CheckFunction, CheckFunctionOnCheck, CheckFunctionOnCombine, CheckFunctionOnCreation, SmallCheckArgs, CheckedRequestEntry, CheckedRequestContents, CheckedRequest } from "./types";
+export { ObjectToCheck, CheckReturn, ErrorFunction, SuccessFunction, Middleware, CheckFunction, CheckFunctionOnCheck, CheckFunctionOnCombine, CheckFunctionOnCreation, SmallCheckArgs, CheckedRequestEntry, CheckedRequestContents, CheckedRequest };

@@ -1,10 +1,11 @@
 import SmallCheckCore from "./smallCheckCore";
-import { CheckFunctionOnCheck, ObjectToCheck, ErrorFunction, SuccessFunction, CheckReturn } from "./../types";
+import { errorFunctionDud, successFunctionDud } from "./../funcs";
+import { CheckFunctionOnCheck, CheckReturn, SmallCheckArgs } from "./../types";
 
 export default class SmallCheckOnCheck extends SmallCheckCore {
 
     combine(): CheckFunctionOnCheck {
-        return (objectToCheck: ObjectToCheck, key: string, successCode: number, successMsg: string, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
+        return ({objectToCheck, key, successCode=0, successMsg="", errorFunction=errorFunctionDud, successFunction=successFunctionDud}: SmallCheckArgs): CheckReturn => {
             for (const checkData of this.checks) {
                 if (!checkData[0](objectToCheck[key])) {
                     errorFunction(checkData[1], checkData[2], key);

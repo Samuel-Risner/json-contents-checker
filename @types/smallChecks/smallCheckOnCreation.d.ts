@@ -1,5 +1,5 @@
 import SmallCheckCore from "./smallCheckCore";
-import { ObjectToCheck, ErrorFunction, SuccessFunction, CheckFunctionOnCreation } from "./../types";
+import { CheckFunctionOnCreation, SmallCheckArgs } from "./../types";
 export default class SmallCheckOnCreation extends SmallCheckCore {
     private objectToCheck;
     private key;
@@ -7,6 +7,6 @@ export default class SmallCheckOnCreation extends SmallCheckCore {
     private successMsg;
     private errorFunction;
     private successFunction;
-    constructor(objectToCheck: ObjectToCheck, key: string, successCode: number, successMsg: string, errorFunction: ErrorFunction, successFunction: SuccessFunction);
+    constructor({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgs);
     combine(): CheckFunctionOnCreation;
 }

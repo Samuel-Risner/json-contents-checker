@@ -1,17 +1,25 @@
 import SmallCheckCore from "./smallCheckCore";
-import { ObjectToCheck, ErrorFunction, SuccessFunction, CheckReturn, CheckFunctionOnCreation } from "./../types";
+import { errorFunctionDud, successFunctionDud } from "./../funcs";
+import { ObjectToCheck, ErrorFunction, SuccessFunction, CheckReturn, CheckFunctionOnCreation, SmallCheckArgs } from "./../types";
 
 export default class SmallCheckOnCreation extends SmallCheckCore {
 
-    constructor(
-        private objectToCheck: ObjectToCheck,
-        private key: string,
-        private successCode: number,
-        private successMsg: string,
-        private errorFunction: ErrorFunction,
-        private successFunction: SuccessFunction
-    ) {
+    private objectToCheck: ObjectToCheck;
+    private key: string;
+    private successCode: number;
+    private successMsg: string;
+    private errorFunction: ErrorFunction;
+    private successFunction: SuccessFunction;
+
+    constructor({objectToCheck, key, successCode=0, successMsg="", errorFunction=errorFunctionDud, successFunction=successFunctionDud}: SmallCheckArgs) {
         super();
+
+        this.objectToCheck = objectToCheck;
+        this.key = key;
+        this.successCode = successCode;
+        this.successMsg = successMsg;
+        this.errorFunction = errorFunction;
+        this.successFunction = successFunction;
     }
 
     combine(): CheckFunctionOnCreation {

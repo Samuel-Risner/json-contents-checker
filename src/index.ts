@@ -58,6 +58,8 @@ import {
     CheckFunctionOnCombine,
     CheckFunctionOnCreation,
 
+    SmallCheckArgs,
+
     CheckedRequestEntry,
     CheckedRequestContents,
     CheckedRequest
@@ -77,6 +79,8 @@ export {
     CheckFunctionOnCheck,
     CheckFunctionOnCombine,
     CheckFunctionOnCreation,
+
+    SmallCheckArgs,
 
     CheckedRequestEntry,
     CheckedRequestContents,
