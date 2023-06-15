@@ -213,6 +213,6 @@ export default abstract class SmallCheckCore {
      */
     regExpNoMatch(errorCode: number, errorMsg: string, regExp: RegExp): this;
     protected evaluateChecks(objectToCheck: ObjectToCheck, key: string, successCode: number, successMsg: string, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn;
-    combine(objectToCheck: ObjectToCheck, key: string, successCode: number, successMsg: string, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckFunctionPreCheck | CheckFunctionOnCheck;
+    abstract combine(objectToCheck: ObjectToCheck, key: string, successCode: number, successMsg: string, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckFunctionPreCheck | CheckFunctionOnCheck;
     combineChain(key: string, successCode?: number, successMsg?: string): CheckFunctionChain;
 }

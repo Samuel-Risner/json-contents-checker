@@ -327,18 +327,14 @@ export default abstract class SmallCheckCore {
         return [true, successCode, successMsg];
     }
 
-    combine(
+    abstract combine(
         objectToCheck: ObjectToCheck,
         key: string,
         successCode: number,
         successMsg: string,
         errorFunction: ErrorFunction,
         successFunction: SuccessFunction
-    ): CheckFunctionPreCheck | CheckFunctionOnCheck {
-        return (): CheckReturn => {
-            return this.evaluateChecks(objectToCheck, key, successCode, successMsg, errorFunction, successFunction);
-        };
-    }
+    ): CheckFunctionPreCheck | CheckFunctionOnCheck;
 
     combineChain(
         key: string,
