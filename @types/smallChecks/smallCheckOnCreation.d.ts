@@ -1,6 +1,6 @@
-import SmallCheckCore from "./core/smallCheck";
+import SmallCheckCore from "./smallCheckCore";
 import { ObjectToCheck, ErrorFunction, SuccessFunction, CheckFunctionOnCreation } from "./../types";
-export default class OnCreation extends SmallCheckCore {
+export default class SmallCheckOnCreation extends SmallCheckCore {
     private objectToCheck;
     private key;
     private successCode;

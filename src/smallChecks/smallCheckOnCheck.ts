@@ -1,7 +1,7 @@
-import SmallCheckCore from "./core/smallCheck";
+import SmallCheckCore from "./smallCheckCore";
 import { CheckFunctionOnCheck, ObjectToCheck, ErrorFunction, SuccessFunction, CheckReturn } from "./../types";
 
-export default class OnCheck extends SmallCheckCore {
+export default class SmallCheckOnCheck extends SmallCheckCore {
 
     combine(): CheckFunctionOnCheck {
         return (objectToCheck: ObjectToCheck, key: string, successCode: number, successMsg: string, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {

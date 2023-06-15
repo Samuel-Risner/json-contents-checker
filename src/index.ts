@@ -1,12 +1,12 @@
 // Small checks:
-import OnCheck from "./smallChecks/onCheck";
-import OnCombine from "./smallChecks/onCombine";
-import OnCreation from "./smallChecks/onCreation";
+import SmallCheckOnCheck from "./smallChecks/smallCheckOnCheck";
+import SmallCheckOnCombine from "./smallChecks/smallCheckOnCombine";
+import SmallCheckOnCreation from "./smallChecks/smallCheckOnCreation";
 
 export {
-    OnCheck,
-    OnCombine,
-    OnCreation
+    SmallCheckOnCheck,
+    SmallCheckOnCombine,
+    SmallCheckOnCreation
 }
 
 // Big checks:

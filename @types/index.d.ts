@@ -1,7 +1,7 @@
-import OnCheck from "./smallChecks/onCheck";
-import OnCombine from "./smallChecks/onCombine";
-import OnCreation from "./smallChecks/onCreation";
-export { OnCheck, OnCombine, OnCreation };
+import SmallCheckOnCheck from "./smallChecks/smallCheckOnCheck";
+import SmallCheckOnCombine from "./smallChecks/smallCheckOnCombine";
+import SmallCheckOnCreation from "./smallChecks/smallCheckOnCreation";
+export { SmallCheckOnCheck, SmallCheckOnCombine, SmallCheckOnCreation };
 import { checkBoolean, checkNumber, checkString, CheckBooleanArgs, CheckStringArgs, CheckNumberArgs } from "./bigChecks";
 export { checkBoolean, checkNumber, checkString, CheckBooleanArgs, CheckStringArgs, CheckNumberArgs };
 import { chainChecks, chainChecksMiddleware, chainChecksMiddlewareCustom } from "./check";
