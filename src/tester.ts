@@ -37,7 +37,7 @@ class Tester {
     }
 
     logResults() {
-        console.log(`Tests in total: ${this.passedTests + this.failedTests}`);
+        console.log(`Tests in total: ${this.passedTests + this.failedTests + this.criticalTests}`);
         if (this.criticalTests > 0) {
             console.log(`\t⛔ Critical tests: ${this.criticalTests}`);
         }
