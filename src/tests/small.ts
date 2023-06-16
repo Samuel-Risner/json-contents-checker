@@ -1,5 +1,5 @@
 import tester from "./../tester";
-import mockObject, { amountKeys } from "./mockObject";
+import mockObject, { amountKeys } from "../mockObject";
 import { SmallCheckOnCheck, SmallCheckOnCombine, SmallCheckOnCreation, errorFunctionDud, successFunctionDud, CheckReturn } from "@samuel-risner/json-contents-checker";
 
 type TestVariant = {
