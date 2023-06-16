@@ -13,7 +13,7 @@ class Tester {
     }
 
     private passedTest(name: string, expectedOutput: CheckReturn, actualOutput: CheckReturn): true {
-        console.log(`✔ Test passed for '${name}'!`);
+        console.log(`✅ Test passed for '${name}'!`);
         console.log(`\texpected output: [${expectedOutput}] actual output: [${actualOutput}]`);
         console.log();
         this.passedTests++;
@@ -44,7 +44,7 @@ class Tester {
         if (this.failedTests > 0) {
             console.log(`\t❌ Failed tests: ${this.failedTests}`);
         }
-        console.log(`\t✔ Passed tests: ${this.passedTests}`);
+        console.log(`\t✅ Passed tests: ${this.passedTests}`);
     }
 
     test(name: string, expectedOutput: CheckReturn | undefined, testFunction:(key: string) => CheckReturn, key: string): boolean {
