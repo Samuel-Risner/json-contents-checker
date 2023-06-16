@@ -8,7 +8,7 @@ const errorFunctionDebug: ErrorFunction = (errorCode: number, errorMsg: string, 
 }
 
 const successFunctionDebug: SuccessFunction = (successCode: number, successMsg: string, key: string): void => {
-    console.log(`✔ The check on '${key}' was successful!`);
+    console.log(`✅ The check on '${key}' was successful!`);
     console.log(`\t>>> Success code: ${successCode}`);
     console.log(`\t>>> Success msg: '${successMsg}'`);
     console.log();

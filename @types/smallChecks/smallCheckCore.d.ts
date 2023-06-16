@@ -19,7 +19,7 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails if the value does not exist / is `undefined`.
      *
-     * ✔ The check succeeds if the value is anything other than `undefined`.
+     * ✅ The check succeeds if the value is anything other than `undefined`.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -29,7 +29,7 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails if the value is `null`.
      *
-     * ✔ The check succeeds if the value is anything other than `null`.
+     * ✅ The check succeeds if the value is anything other than `null`.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -39,11 +39,11 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails if the value isn't a number or is a finite number.
      *
-     * ✔ The check succeeds if the value is a non-finite number.
+     * ✅ The check succeeds if the value is a non-finite number.
      *
      * ❌ Invalid values: `"0"`, `2.5`, `null`, `undefined`, `true`, `NaN`
      *
-     * ✔ Valid values: `-10`, `-1.0`, `0`, `5`, `1.0`
+     * ✅ Valid values: `-10`, `-1.0`, `0`, `5`, `1.0`
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -53,11 +53,11 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails if the value isn't a number.
      *
-     * ✔ The check succeeds if the value is a finite or non-finite number.
+     * ✅ The check succeeds if the value is a finite or non-finite number.
      *
      * ❌ Invalid values: `"0"`, `null`, `undefined`, `true`, `NaN`
      *
-     * ✔ Valid values: `-10`, `-1.0`, `0`, `5`, `1.0`, `2.5`
+     * ✅ Valid values: `-10`, `-1.0`, `0`, `5`, `1.0`, `2.5`
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -67,7 +67,7 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails if the value is not `NaN` (Number.NaN).
      *
-     * ✔ The check succeeds when the value is `NaN` (Number.NaN).
+     * ✅ The check succeeds when the value is `NaN` (Number.NaN).
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -77,7 +77,7 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails when the value is not a safe integer.
      *
-     * ✔ The check succeeds if the value is a safe integer.
+     * ✅ The check succeeds if the value is a safe integer.
      *
      * ℹ Safe integers range from `-(2^53 - 1)` to `2^53 - 1`.
      *
@@ -85,7 +85,7 @@ export default abstract class SmallCheckCore {
      *
      * ❌ Invalid values: `"0"`, `2.5`, `null`, `undefined`, `true`, `NaN` (Or when the number is too big or small.)
      *
-     * ✔ Valid values: `-10`, `-1.0`, `0`, `5`, `1.0`
+     * ✅ Valid values: `-10`, `-1.0`, `0`, `5`, `1.0`
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -95,7 +95,7 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails when the value is not a string.
      *
-     * ✔ The check succeeds when the value is a string.
+     * ✅ The check succeeds when the value is a string.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -105,7 +105,7 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails when the value is not a boolean.
      *
-     * ✔ The check succeeds when the value is a boolean.
+     * ✅ The check succeeds when the value is a boolean.
      *
      * @param errorCode The code which is reported when the check fails.
      * @param errorMsg The message which is reported when the check fails.
@@ -115,7 +115,7 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails when the length of the value is smaller than `minLength`.
      *
-     * ✔ The check succeeds when the length of the value is greater than `minLength`.
+     * ✅ The check succeeds when the length of the value is greater than `minLength`.
      *
      * ❗ **NOTE: Before using this check, you should confirm that the value is of type string e.g. use `isString`.**
      *
@@ -128,7 +128,7 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails when the length of the value is greater than `maxLength`.
      *
-     * ✔ The check succeeds when the length of the value is smaller than `maxLength`.
+     * ✅ The check succeeds when the length of the value is smaller than `maxLength`.
      *
      * ❗ **NOTE: Before using this check, you should confirm that the value is of type string e.g. use `isString`.**
      *
@@ -141,7 +141,7 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails when the size of the value is smaller than the `minSize`.
      *
-     * ✔ The check succeeds when the size of the value is grater than the `minSize`.
+     * ✅ The check succeeds when the size of the value is grater than the `minSize`.
      *
      * ❗ **NOTE: Before using this check, you should confirm that the value is of type number e.g. use `isNumber` or `isFiniteNumber` or `isSafeNumber`.**
      *
@@ -154,7 +154,7 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails when the size of the value is greater than the `minSize`.
      *
-     * ✔ The check succeeds when the size of the value is smaller than the `minSize`.
+     * ✅ The check succeeds when the size of the value is smaller than the `minSize`.
      *
      * ❗ **NOTE: Before using this check, you should confirm that the value is of type number e.g. use `isNumber` or `isFiniteNumber` or `isSafeNumber`.**
      *
@@ -167,7 +167,7 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails if the value contains any letters that are not in `letters`.
      *
-     * ✔ The check succeeds if the value only contains letters that are in `letters`.
+     * ✅ The check succeeds if the value only contains letters that are in `letters`.
      *
      * ❗ **NOTE: Before using this check, you should confirm that the value is of type string e.g. use `isString`.**
      *
@@ -179,7 +179,7 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails if the value contains any letters that are in `letters`.
      *
-     * ✔ The check succeeds if the value does not contain any letters that are in `letters`.
+     * ✅ The check succeeds if the value does not contain any letters that are in `letters`.
      *
      * ❗ **NOTE: Before using this check, you should confirm that the value is of type string e.g. use `isString`.**
      *
@@ -191,7 +191,7 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails if the value does not match the provided RegExp `regExp`.
      *
-     * ✔ The check succeeds if the value matches the provided RegExp `regExp`.
+     * ✅ The check succeeds if the value matches the provided RegExp `regExp`.
      *
      * ❗ **NOTE: Before using this check, you should confirm that the value is of type string e.g. use `isString`.**
      *
@@ -203,7 +203,7 @@ export default abstract class SmallCheckCore {
     /**
      * ❌ The check fails if the value matches the provided RegExp `regExp`.
      *
-     * ✔ The check succeeds if the value does not match the provided RegExp `regExp`.
+     * ✅ The check succeeds if the value does not match the provided RegExp `regExp`.
      *
      * ❗ **NOTE: Before using this check, you should confirm that the value is of type string e.g. use `isString`.**
      *
