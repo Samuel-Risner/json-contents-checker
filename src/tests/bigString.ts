@@ -12,7 +12,7 @@ type TestVariant = {
 const testVariations: TestVariant[] = [
     {
         namePart: "",
-        func: (key: string) => {
+        func: (key: string): CheckStringArgs => {
             return { key: key }
         },
         expected: []

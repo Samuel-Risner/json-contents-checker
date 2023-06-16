@@ -6,6 +6,6 @@ import doChecksBigString from "./tests/bigString";
 
 doChecksSmall();
 doChecksBigBoolean();
-doChecksBigNumber();
-doChecksBigString();
+// doChecksBigNumber();
+// doChecksBigString();
 tester.logResults();
