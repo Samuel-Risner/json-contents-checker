@@ -34,6 +34,6 @@ type CheckNumberArgs = {
  * @param minValue The minimum value the value that is being checked may have.
  * @param maxValue The maximum value the value that is being checked may have.
  *
- * @returns A tuple consisting of a boolean indicating if the check was successful (`true`) or not, a number which is either the error code if the check failed, otherwise the success code and a string which is either the error message if the check filed, otherwise the success message.
+ * @returns A tuple consisting of a boolean indicating if the check was successful (`true`) or not (`false`), a number which is either the error code if the check failed, otherwise the success code and a string which is either the error message if the check failed, otherwise the success message.
  */
 declare function checkNumber({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull, allowNaN, isSafe, allowDecimal, minValue, maxValue }: CheckNumberArgs): CheckFunctionChain;

@@ -34,7 +34,7 @@ type CheckStringArgs = {
  * @param minLength The minimum length the value that is being checked may have.
  * @param maxValue The maximum length the value that is being checked may have.
  * 
- * @param validChars A string with characters that the value that is being checked may contain. If the value that is being checked contains any other characters, `false` is returned.
+ * @param validChars A string with characters that the value that is being checked may contain. If the value that is being checked contains any other characters, `false` is returned. Note that an empty string ("") always passes.
  * @param invalidChars A string with characters that the value that is being checked may not contain. If the value that is being checked contains any characters that were specified, `false` is returned.
  * @param regExpMatch The value that is being checked has to match the RegExp, otherwise `false`is returned.
  * @param regExpNoMatch The value that is being checked may not match the RegExp, otherwise `false`is returned.
