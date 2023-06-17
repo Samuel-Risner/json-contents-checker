@@ -1,6 +1,6 @@
 import { ErrorFunction, SuccessFunction, VerySmallCheckFunction, ObjectToCheck, CheckFunctionOnCheck, CheckFunctionPreCheck, CheckFunctionChain, CheckReturn, SmallCheckArgs } from "./../types";
 
-export default abstract class SmallCheckCore {
+export default abstract class SmallCheckCore extends Function {
 
     /**
      * An array containing the different check functions that are to be used and their error codes and messages.
@@ -10,6 +10,8 @@ export default abstract class SmallCheckCore {
     protected checks: [VerySmallCheckFunction, number, string][];
     
     constructor() {
+        super();
+
         this.checks = [];
     }
 
@@ -337,6 +339,15 @@ export default abstract class SmallCheckCore {
     ): CheckFunctionPreCheck | CheckFunctionOnCheck;
 
     abstract evaluate({
+        objectToCheck,
+        key,
+        successCode,
+        successMsg,
+        errorFunction,
+        successFunction
+    }: SmallCheckArgs): CheckReturn;
+
+    abstract __call__({
         objectToCheck,
         key,
         successCode,
