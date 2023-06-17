@@ -29,7 +29,7 @@ export default abstract class SmallCheckCore extends Function {
     }
 
     /**
-     * ❌ The check fails if the value does not exist / is `undefined`.
+     * ❌ The check fails if the value does not exist/is `undefined`.
      * 
      * ✅ The check succeeds if the value is anything other than `undefined`.
      * 
@@ -203,7 +203,7 @@ export default abstract class SmallCheckCore extends Function {
     /**
      * ❌ The check fails when the size of the value is smaller than the `minSize`.
      * 
-     * ✅ The check succeeds when the size of the value is grater than the `minSize`.
+     * ✅ The check succeeds when the size of the value is greater than the `minSize`.
      * 
      * ❗ **NOTE: Before using this check, you should confirm that the value is of type number e.g. use `isNumber` or `isFiniteNumber` or `isSafeNumber`.**
      * 
@@ -359,8 +359,8 @@ export default abstract class SmallCheckCore extends Function {
     /**
      * Use this function when chaining for ExpressJS middleware.
      * @param key The key of the value you want to check.
-     * @param successCode The code which is reported when the check succeeds, defaults to 0.
-     * @param successMsg The message which is reported when the check succeeds, defaults to "".
+     * @param successCode The code which is reported when the check succeeds, defaults to `0`.
+     * @param successMsg The message which is reported when the check succeeds, defaults to `""`.
      */
     combineChain(
         key: string,

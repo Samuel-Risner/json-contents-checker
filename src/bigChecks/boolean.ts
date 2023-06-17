@@ -20,7 +20,7 @@ type CheckBooleanArgs = {
  * @param errorCode The error code which is used if a check fails. Defaults to `-1`.
  * @param errorMsg The error message which is used if a check fails. Defaults to `""`.
  * @param successCode The success code which is used if no check fails. Defaults to `0`.
- * @param successMsg The success message which is used if no check fails. Defaults to `""`.
+ * @param successMsg The success message is used if no check fails. Defaults to `""`.
  * 
  * @param allowUndefined If the value that is being checked is undefined, `true` is returned.
  * @param allowNull If the value that is being checked is null, `true` is returned.

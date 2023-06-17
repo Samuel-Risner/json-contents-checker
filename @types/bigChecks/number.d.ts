@@ -22,11 +22,11 @@ type CheckNumberArgs = {
  * @param errorCode The error code which is used if a check fails. Defaults to `-1`.
  * @param errorMsg The error message which is used if a check fails. Defaults to `""`.
  * @param successCode The success code which is used if no check fails. Defaults to `0`.
- * @param successMsg The success message which is used if no check fails. Defaults to `""`.
+ * @param successMsg The success message is used if no check fails. Defaults to `""`.
  *
  * @param allowUndefined If the value that is being checked is undefined, `true` is returned.
  * @param allowNull If the value that is being checked is null, `true` is returned.
- * @param allowNaN If the value that is being checked is NaN (Number.NaN) (not a number), `true` is returned.
+ * @param allowNaN If the value that is being checked is NaN (`Number.NaN`) (not a number), `true` is returned.
  *
  * @param isSafe Checks if the value being checked is within the safe integer range (-(2^53 - 1) to 2^53 - 1). Note that decimal numbers will result in `false` being returned unless `allowDecimal` is set to true.
  * @param allowDecimal If this is set to `true` numbers may be decimal numbers.
