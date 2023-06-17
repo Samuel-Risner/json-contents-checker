@@ -8,13 +8,11 @@ type CheckNumberArgs = {
     errorMsg?: string;
     successCode?: number;
     successMsg?: string;
-    notUndefined?: boolean;
-    notNull?: boolean;
     allowUndefined?: boolean;
     allowNull?: boolean;
-    mayBeNaN?: boolean;
+    allowNaN?: boolean;
     isSafe?: boolean;
-    mayBeDecimal?: boolean;
+    allowDecimal?: boolean;
     minValue?: number;
     maxValue?: number;
 }
@@ -31,15 +29,15 @@ type CheckNumberArgs = {
  * 
  * @param allowUndefined If the value that is being checked is undefined, `true` is returned.
  * @param allowNull If the value that is being checked is null, `true` is returned.
- * @param mayBeNaN If the value that is being checked is NaN (Number.NaN) (not a number), `true` is returned.
+ * @param allowNaN If the value that is being checked is NaN (Number.NaN) (not a number), `true` is returned.
  * 
- * @param isSafe Checks if the value being checked is within the safe integer range (-(2^53 - 1) to 2^53 - 1). Note that decimal numbers will result in `false` being returned unless `mayBeDecimal` is set to true.
- * @param mayBeDecimal If this is set to `true` numbers may be decimal numbers.
+ * @param isSafe Checks if the value being checked is within the safe integer range (-(2^53 - 1) to 2^53 - 1). Note that decimal numbers will result in `false` being returned unless `allowDecimal` is set to true.
+ * @param allowDecimal If this is set to `true` numbers may be decimal numbers.
  * 
  * @param minValue The minimum value the value that is being checked may have.
  * @param maxValue The maximum value the value that is being checked may have.
  * 
- * @returns A tuple consisting of a boolean indicating if the check was successful (`true`) or not, a number which is either the error code if the check failed, otherwise the success code and a string which is either the error message if the check filed, otherwise the success message.
+ * @returns A tuple consisting of a boolean indicating if the check was successful (`true`) or not (`false`), a number which is either the error code if the check failed, otherwise the success code and a string which is either the error message if the check failed, otherwise the success message.
  */
 function checkNumber({
     key,
@@ -49,17 +47,16 @@ function checkNumber({
     successMsg = "",
     allowUndefined,
     allowNull,
-    mayBeNaN,
-
+    allowNaN,
     isSafe,
-    mayBeDecimal,
+    allowDecimal,
     minValue,
     maxValue
 }: CheckNumberArgs): CheckFunctionChain {
     return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
         const toCheck: unknown = objectToCheck[key];
 
-        if (_checkNumber(toCheck, allowUndefined, allowNull, mayBeNaN, isSafe, mayBeDecimal, minValue, maxValue)) {
+        if (_checkNumber(toCheck, allowUndefined, allowNull, allowNaN, isSafe, allowDecimal, minValue, maxValue)) {
             successFunction(successCode, successMsg, key);
             return [true, successCode, successMsg];
         } else {
@@ -83,25 +80,28 @@ function _checkNumber(
     toCheck: unknown,
     allowUndefined?: boolean,
     allowNull?: boolean,
-    mayBeNaN?: boolean,
+    allowNaN?: boolean,
     isSafe?: boolean,
-    mayBeDecimal?: boolean,
+    allowDecimal?: boolean,
     minValue?: number,
     maxValue?: number
 ): boolean {
     if (allowUndefined && (toCheck === undefined)) return true;
     if (allowNull && (toCheck === null)) return true;
-    
-    const num: number = Number(toCheck);
-    if (mayBeNaN && Number.isNaN(num)) return true;
+    if (allowNaN && Number.isNaN(toCheck)) return true;
 
-    if (Number.isNaN(num) || !Number.isFinite(num)) return false;
+    if (isSafe && allowDecimal) {
+        if (!Number.isFinite(toCheck)) return false;
+        if ((toCheck as number > Number.MAX_SAFE_INTEGER) || (toCheck as number < Number.MIN_SAFE_INTEGER)) return false;
+    } else if (!isSafe && !allowDecimal) {
+        if (!Number.isInteger(toCheck)) return false;
+    } else {
+        if (isSafe && !Number.isSafeInteger(toCheck)) return false;
+        if (allowDecimal && !Number.isFinite(toCheck)) return false;
+    }
 
-    if (isSafe && !Number.isSafeInteger(num)) return false;
-    if (mayBeDecimal && !Number.isInteger(num)) return false;
-
-    if (minValue !== undefined && num < minValue) return false;
-    if (maxValue !== undefined && num > maxValue) return false;
+    if ((minValue !== undefined) && (toCheck as number < minValue)) return false;
+    if ((maxValue !== undefined) && (toCheck as number > maxValue)) return false;
 
     return true;
 }
