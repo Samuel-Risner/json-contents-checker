@@ -1,4 +1,4 @@
-import { ErrorFunction, SuccessFunction, VerySmallCheckFunction, ObjectToCheck, CheckFunctionOnCheck, CheckFunctionPreCheck, CheckFunctionChain, CheckReturn } from "./../types";
+import { ErrorFunction, SuccessFunction, VerySmallCheckFunction, ObjectToCheck, CheckFunctionOnCheck, CheckFunctionPreCheck, CheckFunctionChain, CheckReturn, SmallCheckArgs } from "./../types";
 export default abstract class SmallCheckCore {
     /**
      * An array containing the different check functions that are to be used and their error codes and messages.
@@ -214,5 +214,12 @@ export default abstract class SmallCheckCore {
     regExpNoMatch(errorCode: number, errorMsg: string, regExp: RegExp): this;
     protected evaluateChecks(objectToCheck: ObjectToCheck, key: string, successCode: number, successMsg: string, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn;
     abstract combine(objectToCheck: ObjectToCheck, key: string, successCode: number, successMsg: string, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckFunctionPreCheck | CheckFunctionOnCheck;
+    abstract evaluate({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgs): CheckReturn;
+    /**
+     * Use this function when chaining for ExpressJS middleware.
+     * @param key The key of the value you want to check.
+     * @param successCode The code which is reported when the check succeeds, defaults to 0.
+     * @param successMsg The message which is reported when the check succeeds, defaults to "".
+     */
     combineChain(key: string, successCode?: number, successMsg?: string): CheckFunctionChain;
 }
