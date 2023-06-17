@@ -7,5 +7,5 @@ import doChecksBigString from "./tests/bigString";
 doChecksSmall();
 doChecksBigBoolean();
 doChecksBigNumber();
-// doChecksBigString();
+doChecksBigString();
 tester.logResults();
