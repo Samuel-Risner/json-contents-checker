@@ -16,7 +16,7 @@ const successFunctionDebug: SuccessFunction = (successCode: number, successMsg: 
 
 const errorFunctionDud: ErrorFunction = (errorCode: number, errorMsg: string, key: string): void => {}
 
-const successFunctionDud: SuccessFunction = (successCode: number, successMsg: string, key: string): void => {}
+const successFunctionDud: SuccessFunction = errorFunctionDud;
 
 export {
     errorFunctionDebug,
