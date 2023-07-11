@@ -61,6 +61,7 @@ import {
     CheckFunctionPreCheck,
 
     SmallCheckArgs,
+    SmallCheckArgsOptional,
 
     CheckedRequestEntry,
     CheckedRequestContents,
@@ -82,6 +83,7 @@ export {
     CheckFunctionPreCheck,
 
     SmallCheckArgs,
+    SmallCheckArgsOptional,
 
     CheckedRequestEntry,
     CheckedRequestContents,
