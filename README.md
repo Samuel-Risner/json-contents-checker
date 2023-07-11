@@ -52,7 +52,7 @@ import {
     CheckFunctionOnCheck, // The function that you get returned by calling "combine" on "SmallCheckOnCheck"
     CheckFunctionPreCheck, // The function that you get returned by calling "combine" on "SmallCheckOnCreation" or "SmallCheckOnCombine"
 
-    CheckReturn, // What you get returned from calling one of those two function types ^
+    CheckResult, // The result from calling one of those two function types ^
     SmallCheckArgs, // The arguments passed to the small check functions ("CheckFunctionOnCheck") or classes ("combine" on "SmallCheckOnCombine" or the constructor on "SmallCheckOnCreation")
     SmallCheckArgsOptional, // Special case of ^ needed for "SmallCheckOnCreation"
 
@@ -62,10 +62,7 @@ import {
 
     Middleware, // The type of the function that chainChecksMiddleware returns
 
-    ErrorFunction, SuccessFunction, // The function types for the error and success functions
-
-    ChainResult, // What "chainChecks" returns
-    ChainResultKey // Result in ^ for each checked key
+    ErrorFunction, SuccessFunction // The function types for the error and success functions
 } from "@samuel-risner/json-contents-checker";
 ```
 
@@ -130,7 +127,7 @@ const someCheck: CheckFunctionOnCheck = new SmallCheckOnCheck()
     .minLength(-3, "Ups! Too short.", 2)
     .combine();
 
-const result: CheckReturn = someCheck1({ key: "key0", objectToCheck: mockObject });
+const result: CheckResult = someCheck1({ key: "key0", objectToCheck: mockObject });
 ```
 
 2. When calling the function which returns to you the function for evaluating the checks:
@@ -142,7 +139,7 @@ const someCheck: CheckFunctionPreCheck = new SmallCheckOnCombine()
     .minLength(-3, "Ups! Too short.", 2)
     .combine({ key: "key0", objectToCheck: mockObject });
 
-const result: CheckReturn = someCheck2();
+const result: CheckResult = someCheck2();
 ```
 
 3. When creating the object:
@@ -154,7 +151,7 @@ const someCheck: CheckFunctionPreCheck = new SmallCheckOnCreation({ key: "key0",
     .minLength(-3, "Ups! Too short.", 2)
     .combine();
 
-const result: CheckReturn = someCheck3();
+const result: CheckResult = someCheck3();
 ```
 
 In these three examples `.combine()` was used to acquire another function which was then used to evaluate the checks.
@@ -162,7 +159,7 @@ In these three examples `.combine()` was used to acquire another function which 
 If you want to skip this extra step you can use `.evaluate()` or simply `()` (`.__call__()`) to directly get the result:
 
 ```ts
-const result: CheckReturn = new SmallCheckOnCheck()
+const result: CheckResult = new SmallCheckOnCheck()
     .isString(-1, "The thing that you are trying to check isn't a string.")
     .maxLength(-2, "The string is too long", 5)
     .minLength(-3, "Ups! Too short.", 2)
@@ -170,7 +167,7 @@ const result: CheckReturn = new SmallCheckOnCheck()
 ```
 
 ```ts
-const result: CheckReturn = new SmallCheckOnCombine()
+const result: CheckResult = new SmallCheckOnCombine()
     .isString(-1, "The thing that you are trying to check isn't a string.")
     .maxLength(-2, "The string is too long", 5)
     .minLength(-3, "Ups! Too short.", 2)
@@ -178,7 +175,7 @@ const result: CheckReturn = new SmallCheckOnCombine()
 ```
 
 ```ts
-const result: CheckReturn =  new SmallCheckOnCreation({ key: "key0", objectToCheck: mockObject })
+const result: CheckResult =  new SmallCheckOnCreation({ key: "key0", objectToCheck: mockObject })
     .isString(-1, "The thing that you are trying to check isn't a string.")
     .maxLength(-2, "The string is too long", 5)
     .minLength(-3, "Ups! Too short.", 2)
