@@ -1,3 +1,4 @@
+import { errorFunctionDud, successFunctionDud } from "../funcs";
 import { ErrorFunction, SuccessFunction, VerySmallCheckFunction, ObjectToCheck, CheckFunctionOnCheck, CheckFunctionPreCheck, CheckFunctionChain, CheckReturn, SmallCheckArgs } from "./../types";
 
 export default abstract class SmallCheckCore extends Function {
@@ -367,7 +368,7 @@ export default abstract class SmallCheckCore extends Function {
         successCode: number = 0,
         successMsg: string = ""
     ): CheckFunctionChain {
-        return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
+        return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction = errorFunctionDud, successFunction: SuccessFunction = successFunctionDud): CheckReturn => {
             return this.evaluateChecks(objectToCheck, key, successCode, successMsg, errorFunction, successFunction);
         }
     }
