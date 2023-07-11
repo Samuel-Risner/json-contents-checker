@@ -40,4 +40,15 @@ interface CheckedRequestContents {
     "json-contents-checker"?: CheckedRequestEntry;
 }
 type CheckedRequest = Request & CheckedRequestContents;
-export { ObjectToCheck, CheckReturn, ErrorFunction, SuccessFunction, VerySmallCheckFunction, Middleware, CheckFunctionChain, CheckFunctionOnCheck, CheckFunctionPreCheck, SmallCheckArgs, SmallCheckArgsOptional, CheckedRequestEntry, CheckedRequestContents, CheckedRequest };
+type ChainResultKey = {
+    error: boolean;
+    code: number;
+    msg: string;
+};
+type ChainResult = {
+    error: boolean;
+    separateChecks: {
+        [key: string]: ChainResultKey;
+    };
+};
+export { ObjectToCheck, CheckReturn, ErrorFunction, SuccessFunction, VerySmallCheckFunction, Middleware, CheckFunctionChain, CheckFunctionOnCheck, CheckFunctionPreCheck, SmallCheckArgs, SmallCheckArgsOptional, CheckedRequestEntry, CheckedRequestContents, CheckedRequest, ChainResultKey, ChainResult };
