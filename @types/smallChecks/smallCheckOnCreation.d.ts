@@ -1,5 +1,5 @@
 import SmallCheckCore from "./smallCheckCore";
-import { CheckReturn, CheckFunctionPreCheck, SmallCheckArgs, CheckFunctionChain } from "./../types";
+import { CheckReturn, CheckFunctionPreCheck, SmallCheckArgs, CheckFunctionChain, SmallCheckArgsOptional } from "./../types";
 export default class SmallCheckOnCreation extends SmallCheckCore {
     private objectToCheck;
     private key;
@@ -32,7 +32,7 @@ export default class SmallCheckOnCreation extends SmallCheckCore {
      * @param successFunction The function which is called when the check succeeds.
      * @returns A tuple consisting of a boolean, number and string. If the check failed the boolean is `false` and the number and string are the corresponding error code and message. If the check succeeded the boolean is `true` and the number and string are the passed success code and message.
      */
-    evaluate({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgs): CheckReturn;
+    evaluate({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgsOptional): CheckReturn;
     /**
      * Evaluates all the checks that were set.
      * All the parameters default to the ones that were set when creating this object.
@@ -44,7 +44,7 @@ export default class SmallCheckOnCreation extends SmallCheckCore {
      * @param successFunction The function which is called when the check succeeds.
      * @returns A tuple consisting of a boolean, number and string. If the check failed the boolean is `false` and the number and string are the corresponding error code and message. If the check succeeded the boolean is `true` and the number and string are the passed success code and message.
      */
-    __call__({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgs): CheckReturn;
+    __call__({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgsOptional): CheckReturn;
     /**
      * Use this function when chaining for ExpressJS middleware.
      * All the parameters default to the ones that were set when creating this object.

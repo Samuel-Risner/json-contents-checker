@@ -1,4 +1,4 @@
-import { CheckFunctionChain } from "./../types";
+import { CheckFunctionChain } from "../types";
 export { checkNumber, CheckNumberArgs };
 type CheckNumberArgs = {
     key: string;
