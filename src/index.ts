@@ -48,7 +48,7 @@ export {
 // Types:
 import {
     ObjectToCheck,
-    CheckReturn,
+    CheckResult,
     ErrorFunction,
     SuccessFunction,
 
@@ -73,7 +73,7 @@ import {
 
 export {
     ObjectToCheck,
-    CheckReturn,
+    CheckResult,
     ErrorFunction,
     SuccessFunction,
 

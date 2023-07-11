@@ -10,5 +10,5 @@ import { chainChecks, chainChecksMiddleware, chainChecksMiddlewareCustom } from 
 export { chainChecks, chainChecksMiddleware, chainChecksMiddlewareCustom, };
 import { errorFunctionDebug, successFunctionDebug, errorFunctionDud, successFunctionDud } from "./funcs";
 export { errorFunctionDebug, successFunctionDebug, errorFunctionDud, successFunctionDud };
-import { ObjectToCheck, CheckReturn, ErrorFunction, SuccessFunction, Middleware, CheckFunctionChain, CheckFunctionOnCheck, CheckFunctionPreCheck, SmallCheckArgs, SmallCheckArgsOptional, CheckedRequestEntry, CheckedRequestContents, CheckedRequest, ChainResultKey, ChainResult } from "./types";
-export { ObjectToCheck, CheckReturn, ErrorFunction, SuccessFunction, Middleware, CheckFunctionChain, CheckFunctionOnCheck, CheckFunctionPreCheck, SmallCheckArgs, SmallCheckArgsOptional, CheckedRequestEntry, CheckedRequestContents, CheckedRequest, ChainResultKey, ChainResult };
+import { ObjectToCheck, CheckResult, ErrorFunction, SuccessFunction, Middleware, CheckFunctionChain, CheckFunctionOnCheck, CheckFunctionPreCheck, SmallCheckArgs, SmallCheckArgsOptional, CheckedRequestEntry, CheckedRequestContents, CheckedRequest, ChainResultKey, ChainResult } from "./types";
+export { ObjectToCheck, CheckResult, ErrorFunction, SuccessFunction, Middleware, CheckFunctionChain, CheckFunctionOnCheck, CheckFunctionPreCheck, SmallCheckArgs, SmallCheckArgsOptional, CheckedRequestEntry, CheckedRequestContents, CheckedRequest, ChainResultKey, ChainResult };

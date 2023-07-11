@@ -1,4 +1,4 @@
-import { ErrorFunction, SuccessFunction, VerySmallCheckFunction, ObjectToCheck, CheckFunctionOnCheck, CheckFunctionPreCheck, CheckFunctionChain, CheckReturn, SmallCheckArgs } from "./../types";
+import { ErrorFunction, SuccessFunction, VerySmallCheckFunction, ObjectToCheck, CheckFunctionOnCheck, CheckFunctionPreCheck, CheckFunctionChain, CheckResult, SmallCheckArgs } from "./../types";
 export default abstract class SmallCheckCore extends Function {
     /**
      * An array containing the different check functions that are to be used and their error codes and messages.
@@ -212,10 +212,10 @@ export default abstract class SmallCheckCore extends Function {
      * @param regExp The RegExp to which the value should not match.
      */
     regExpNoMatch(errorCode: number, errorMsg: string, regExp: RegExp): this;
-    protected evaluateChecks(objectToCheck: ObjectToCheck, key: string, successCode: number, successMsg: string, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn;
+    protected evaluateChecks(objectToCheck: ObjectToCheck, key: string, successCode: number, successMsg: string, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckResult;
     abstract combine(objectToCheck: ObjectToCheck, key: string, successCode: number, successMsg: string, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckFunctionPreCheck | CheckFunctionOnCheck;
-    abstract evaluate({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgs): CheckReturn;
-    abstract __call__({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgs): CheckReturn;
+    abstract evaluate({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgs): CheckResult;
+    abstract __call__({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgs): CheckResult;
     /**
      * Use this function when chaining for ExpressJS middleware.
      * @param key The key of the value you want to check.

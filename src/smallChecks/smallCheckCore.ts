@@ -1,5 +1,5 @@
 import { errorFunctionDud, successFunctionDud } from "../funcs";
-import { ErrorFunction, SuccessFunction, VerySmallCheckFunction, ObjectToCheck, CheckFunctionOnCheck, CheckFunctionPreCheck, CheckFunctionChain, CheckReturn, SmallCheckArgs } from "./../types";
+import { ErrorFunction, SuccessFunction, VerySmallCheckFunction, ObjectToCheck, CheckFunctionOnCheck, CheckFunctionPreCheck, CheckFunctionChain, CheckResult, SmallCheckArgs } from "./../types";
 
 export default abstract class SmallCheckCore extends Function {
 
@@ -318,7 +318,7 @@ export default abstract class SmallCheckCore extends Function {
         successMsg: string,
         errorFunction: ErrorFunction,
         successFunction: SuccessFunction
-    ): CheckReturn {
+    ): CheckResult {
         for (const checkData of this.checks) {
             if (!checkData[0](objectToCheck[key])) {
                 errorFunction(checkData[1], checkData[2], key);
@@ -346,7 +346,7 @@ export default abstract class SmallCheckCore extends Function {
         successMsg,
         errorFunction,
         successFunction
-    }: SmallCheckArgs): CheckReturn;
+    }: SmallCheckArgs): CheckResult;
 
     abstract __call__({
         objectToCheck,
@@ -355,7 +355,7 @@ export default abstract class SmallCheckCore extends Function {
         successMsg,
         errorFunction,
         successFunction
-    }: SmallCheckArgs): CheckReturn;
+    }: SmallCheckArgs): CheckResult;
 
     /**
      * Use this function when chaining for ExpressJS middleware.
@@ -368,7 +368,7 @@ export default abstract class SmallCheckCore extends Function {
         successCode: number = 0,
         successMsg: string = ""
     ): CheckFunctionChain {
-        return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction = errorFunctionDud, successFunction: SuccessFunction = successFunctionDud): CheckReturn => {
+        return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction = errorFunctionDud, successFunction: SuccessFunction = successFunctionDud): CheckResult => {
             return this.evaluateChecks(objectToCheck, key, successCode, successMsg, errorFunction, successFunction);
         }
     }

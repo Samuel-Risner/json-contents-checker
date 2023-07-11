@@ -1,5 +1,5 @@
 import SmallCheckCore from "./smallCheckCore";
-import { CheckReturn, CheckFunctionPreCheck, SmallCheckArgs } from "./../types";
+import { CheckResult, CheckFunctionPreCheck, SmallCheckArgs } from "./../types";
 export default class SmallCheckOnCombine extends SmallCheckCore {
     /**
      * Combines all the checks and returns a function for evaluating them.
@@ -22,7 +22,7 @@ export default class SmallCheckOnCombine extends SmallCheckCore {
      * @param successFunction The function which is called when the check succeeds, defaults to `successFunctionDud`, meaning that nothing happens.
      * @returns A tuple consisting of a boolean, number and string. If the check failed the boolean is `false` and the number and string are the corresponding error code and message. If the check succeeded the boolean is `true` and the number and string are the passed success code and message.
      */
-    evaluate({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgs): CheckReturn;
+    evaluate({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgs): CheckResult;
     /**
      * Evaluates all the checks that were set.
      * @param objectToCheck The object from which you want to check a value.
@@ -33,5 +33,5 @@ export default class SmallCheckOnCombine extends SmallCheckCore {
      * @param successFunction The function which is called when the check succeeds, defaults to `successFunctionDud`, meaning that nothing happens.
      * @returns A tuple consisting of a boolean, number and string. If the check failed the boolean is `false` and the number and string are the corresponding error code and message. If the check succeeded the boolean is `true` and the number and string are the passed success code and message.
      */
-    __call__({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgs): CheckReturn;
+    __call__({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgs): CheckResult;
 }
