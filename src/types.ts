@@ -48,6 +48,19 @@ interface CheckedRequestContents {
 
 type CheckedRequest = Request & CheckedRequestContents;
 
+type ChainResultKey = {
+    error: boolean;
+    code: number;
+    msg: string;
+}
+
+type ChainResult = {
+    error: boolean;
+    separateChecks: {
+        [key: string]: ChainResultKey;
+    };
+}
+
 export {
     ObjectToCheck,
     CheckReturn,
@@ -67,5 +80,8 @@ export {
 
     CheckedRequestEntry,
     CheckedRequestContents,
-    CheckedRequest
+    CheckedRequest,
+
+    ChainResultKey,
+    ChainResult
 }

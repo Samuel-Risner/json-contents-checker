@@ -1,15 +1,25 @@
 import { NextFunction, Response, Request } from "express";
 
-import { CheckFunctionChain, CheckedRequest, CheckedRequestEntry, ErrorFunction, Middleware, SuccessFunction, ObjectToCheck } from "./types";
+import { CheckFunctionChain, CheckedRequest, CheckedRequestEntry, ErrorFunction, Middleware, SuccessFunction, ObjectToCheck, ChainResult } from "./types";
 
 function chainChecks(
-    errorFunction: ErrorFunction,
-    successFunction: SuccessFunction,
     objectToCheck: ObjectToCheck,
     ...checks: CheckFunctionChain[]
-): () => void {
+): () => ChainResult {
     return () => {
+        const result: ChainResult = { error: false, separateChecks: {} };
+
+        const errorFunction = (errorCode: number, errorMsg: string, key: string) => {
+            result.separateChecks[key] = { code: errorCode, msg: errorMsg, error: true };
+            result.error = true;
+        }
+
+        const successFunction = (successCode: number, successMsg: string, key: string) => {
+            result.separateChecks[key] = { code: successCode, msg: successMsg, error: false };
+        }
+        
         checks.forEach((value: CheckFunctionChain) => {value(objectToCheck, errorFunction, successFunction);});
+        return result;
     }
 }
 
