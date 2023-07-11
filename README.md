@@ -53,7 +53,7 @@ import {
     CheckFunctionPreCheck, // The function that you get returned by calling "combine" on "SmallCheckOnCreation" or "SmallCheckOnCombine"
 
     CheckResult, // The result from calling one of those two function types ^
-    SmallCheckArgs, // The arguments passed to the small check functions ("CheckFunctionOnCheck") or classes ("combine" on "SmallCheckOnCombine" or the constructor on "SmallCheckOnCreation")
+    SmallCheckArgs, // The props passed to the small check functions ("CheckFunctionOnCheck") or classes ("combine" on "SmallCheckOnCombine" or the constructor on "SmallCheckOnCreation")
     SmallCheckArgsOptional, // Special case of ^ needed for "SmallCheckOnCreation"
 
     CheckedRequest, // When using middleware in ExpressJS use "req: CheckedRequest" instead of "req: Request"

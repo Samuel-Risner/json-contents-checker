@@ -1,6 +1,6 @@
 import { CheckFunctionChain } from "../types";
-export { checkString, CheckStringArgs };
-type CheckStringArgs = {
+export { checkString, CheckStringProps };
+type CheckStringProps = {
     key: string;
     errorCode?: number;
     errorMsg?: string;
@@ -38,4 +38,4 @@ type CheckStringArgs = {
  *
  * @returns A tuple consisting of a boolean indicating if the check was successful (`true`) or not, a number which is either the error code if the check failed, otherwise the success code and a string which is either the error message if the check filed, otherwise the success message.
  */
-declare function checkString({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull, minLength, maxLength, validChars, invalidChars, regExpMatch, regExpNoMatch }: CheckStringArgs): CheckFunctionChain;
+declare function checkString({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull, minLength, maxLength, validChars, invalidChars, regExpMatch, regExpNoMatch }: CheckStringProps): CheckFunctionChain;

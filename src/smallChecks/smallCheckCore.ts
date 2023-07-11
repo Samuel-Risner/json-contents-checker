@@ -1,5 +1,5 @@
 import { errorFunctionDud, successFunctionDud } from "../funcs";
-import { ErrorFunction, SuccessFunction, VerySmallCheckFunction, ObjectToCheck, CheckFunctionOnCheck, CheckFunctionPreCheck, CheckFunctionChain, CheckResult, SmallCheckArgs } from "./../types";
+import { ErrorFunction, SuccessFunction, VerySmallCheckFunction, ObjectToCheck, CheckFunctionOnCheck, CheckFunctionPreCheck, CheckFunctionChain, CheckResult, SmallCheckProps } from "./../types";
 
 export default abstract class SmallCheckCore extends Function {
 
@@ -346,7 +346,7 @@ export default abstract class SmallCheckCore extends Function {
         successMsg,
         errorFunction,
         successFunction
-    }: SmallCheckArgs): CheckResult;
+    }: SmallCheckProps): CheckResult;
 
     abstract __call__({
         objectToCheck,
@@ -355,7 +355,7 @@ export default abstract class SmallCheckCore extends Function {
         successMsg,
         errorFunction,
         successFunction
-    }: SmallCheckArgs): CheckResult;
+    }: SmallCheckProps): CheckResult;
 
     /**
      * Use this function when chaining for ExpressJS middleware.

@@ -1,9 +1,9 @@
 import { errorFunctionDud, successFunctionDud } from "../funcs";
 import { CheckFunctionChain, CheckResult, ErrorFunction, ObjectToCheck, SuccessFunction } from "../types";
 
-export { checkNumber, CheckNumberArgs }
+export { checkNumber, CheckNumberProps }
 
-type CheckNumberArgs = {
+type CheckNumberProps = {
     key: string;
     errorCode?: number;
     errorMsg?: string;
@@ -53,7 +53,7 @@ function checkNumber({
     allowDecimal,
     minValue,
     maxValue
-}: CheckNumberArgs): CheckFunctionChain {
+}: CheckNumberProps): CheckFunctionChain {
     return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction = errorFunctionDud, successFunction: SuccessFunction = successFunctionDud): CheckResult => {
         const toCheck: unknown = objectToCheck[key];
 

@@ -11,18 +11,18 @@ export {
 
 // Big checks:
 
-import { CheckBooleanArgs, checkBoolean } from "./bigChecks/boolean";
-import { CheckNumberArgs, checkNumber } from "./bigChecks/number";
-import { CheckStringArgs, checkString } from "./bigChecks/string";
+import { CheckBooleanProps, checkBoolean } from "./bigChecks/boolean";
+import { CheckNumberProps, checkNumber } from "./bigChecks/number";
+import { CheckStringProps, checkString } from "./bigChecks/string";
 
 export {
     checkBoolean,
     checkNumber,
     checkString,
 
-    CheckBooleanArgs,
-    CheckStringArgs,
-    CheckNumberArgs
+    CheckBooleanProps,
+    CheckStringProps,
+    CheckNumberProps
 }
 
 // Chain checks:
@@ -60,8 +60,8 @@ import {
     CheckFunctionOnCheck,
     CheckFunctionPreCheck,
 
-    SmallCheckArgs,
-    SmallCheckArgsOptional,
+    SmallCheckProps,
+    SmallCheckPropsOptional,
 
     CheckedRequestEntry,
     CheckedRequestContents,
@@ -85,8 +85,8 @@ export {
     CheckFunctionOnCheck,
     CheckFunctionPreCheck,
 
-    SmallCheckArgs,
-    SmallCheckArgsOptional,
+    SmallCheckProps,
+    SmallCheckPropsOptional,
 
     CheckedRequestEntry,
     CheckedRequestContents,

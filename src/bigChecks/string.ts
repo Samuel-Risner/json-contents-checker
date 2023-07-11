@@ -1,9 +1,9 @@
 import { errorFunctionDud, successFunctionDud } from "../funcs";
 import { CheckFunctionChain, CheckResult, ErrorFunction, ObjectToCheck, SuccessFunction } from "../types";
 
-export { checkString, CheckStringArgs }
+export { checkString, CheckStringProps }
 
-type CheckStringArgs = {
+type CheckStringProps = {
     key: string;
     errorCode?: number;
     errorMsg?: string;
@@ -56,7 +56,7 @@ function checkString({
     invalidChars,
     regExpMatch,
     regExpNoMatch
-}: CheckStringArgs): CheckFunctionChain {
+}: CheckStringProps): CheckFunctionChain {
     return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction = errorFunctionDud, successFunction: SuccessFunction = successFunctionDud): CheckResult => {
         const toCheck: unknown = objectToCheck[key];
 

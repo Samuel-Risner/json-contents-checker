@@ -1,5 +1,5 @@
 import SmallCheckCore from "./smallCheckCore";
-import { CheckResult, CheckFunctionPreCheck, SmallCheckArgs, CheckFunctionChain, SmallCheckArgsOptional } from "./../types";
+import { CheckResult, CheckFunctionPreCheck, SmallCheckProps, CheckFunctionChain, SmallCheckPropsOptional } from "./../types";
 export default class SmallCheckOnCreation extends SmallCheckCore {
     private objectToCheck;
     private key;
@@ -15,7 +15,7 @@ export default class SmallCheckOnCreation extends SmallCheckCore {
      * @param errorFunction The function which is called when the check fails, defaults to `errorFunctionDud`, meaning that nothing happens.
      * @param successFunction The function which is called when the check succeeds, defaults to `successFunctionDud`, meaning that nothing happens.
      */
-    constructor({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgs);
+    constructor({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckProps);
     /**
      * Combines all the checks and returns a function for evaluating them.
      * @returns A function that when called evaluates all the checks that were set, the function requires no arguments, and the return value is equal to `this.evaluate`.
@@ -32,7 +32,7 @@ export default class SmallCheckOnCreation extends SmallCheckCore {
      * @param successFunction The function which is called when the check succeeds.
      * @returns A tuple consisting of a boolean, number and string. If the check failed the boolean is `false` and the number and string are the corresponding error code and message. If the check succeeded the boolean is `true` and the number and string are the passed success code and message.
      */
-    evaluate({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgsOptional): CheckResult;
+    evaluate({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckPropsOptional): CheckResult;
     /**
      * Evaluates all the checks that were set.
      * All the parameters default to the ones that were set when creating this object.
@@ -44,7 +44,7 @@ export default class SmallCheckOnCreation extends SmallCheckCore {
      * @param successFunction The function which is called when the check succeeds.
      * @returns A tuple consisting of a boolean, number and string. If the check failed the boolean is `false` and the number and string are the corresponding error code and message. If the check succeeded the boolean is `true` and the number and string are the passed success code and message.
      */
-    __call__({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckArgsOptional): CheckResult;
+    __call__({ objectToCheck, key, successCode, successMsg, errorFunction, successFunction }: SmallCheckPropsOptional): CheckResult;
     /**
      * Use this function when chaining for ExpressJS middleware.
      * All the parameters default to the ones that were set when creating this object.

@@ -8,9 +8,9 @@ type SuccessFunction = (successCode: number, successMsg: string, key: string) =>
 type VerySmallCheckFunction = (toCheck: any) => boolean;
 type Middleware = (req: CheckedRequest, res: Response, next: NextFunction) => void;
 type CheckFunctionChain = (objectToCheck: ObjectToCheck, errorFunction?: ErrorFunction, successFunction?: SuccessFunction) => CheckResult;
-type CheckFunctionOnCheck = (smallCheckArgs: SmallCheckArgs) => CheckResult;
+type CheckFunctionOnCheck = (smallCheckProps: SmallCheckProps) => CheckResult;
 type CheckFunctionPreCheck = () => CheckResult;
-type SmallCheckArgs = {
+type SmallCheckProps = {
     objectToCheck: ObjectToCheck;
     key: string;
     errorFunction?: ErrorFunction;
@@ -18,7 +18,7 @@ type SmallCheckArgs = {
     successCode?: number;
     successMsg?: string;
 };
-type SmallCheckArgsOptional = {
+type SmallCheckPropsOptional = {
     objectToCheck?: ObjectToCheck;
     key?: string;
     errorFunction?: ErrorFunction;
@@ -51,4 +51,4 @@ type ChainResult = {
         [key: string]: ChainResultKey;
     };
 };
-export { ObjectToCheck, CheckResult, ErrorFunction, SuccessFunction, VerySmallCheckFunction, Middleware, CheckFunctionChain, CheckFunctionOnCheck, CheckFunctionPreCheck, SmallCheckArgs, SmallCheckArgsOptional, CheckedRequestEntry, CheckedRequestContents, CheckedRequest, ChainResultKey, ChainResult };
+export { ObjectToCheck, CheckResult, ErrorFunction, SuccessFunction, VerySmallCheckFunction, Middleware, CheckFunctionChain, CheckFunctionOnCheck, CheckFunctionPreCheck, SmallCheckProps, SmallCheckPropsOptional, CheckedRequestEntry, CheckedRequestContents, CheckedRequest, ChainResultKey, ChainResult };
