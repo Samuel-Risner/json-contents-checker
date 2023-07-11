@@ -65,7 +65,10 @@ import {
 
     CheckedRequestEntry,
     CheckedRequestContents,
-    CheckedRequest
+    CheckedRequest,
+
+    ChainResultKey,
+    ChainResult
 } from "./types";
 
 export {
@@ -87,5 +90,8 @@ export {
 
     CheckedRequestEntry,
     CheckedRequestContents,
-    CheckedRequest
+    CheckedRequest,
+
+    ChainResultKey,
+    ChainResult
 }
