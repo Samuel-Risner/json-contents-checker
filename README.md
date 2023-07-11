@@ -70,7 +70,7 @@ npm test
 
     {
         namePart: "",
-        func: (key: string): CheckNumberArgs => {
+        func: (key: string): CheckNumberProps => {
             return { key: key, errorMsg: "-1" }
         },
         expected: [
@@ -96,7 +96,7 @@ npm test
 
     {
         namePart: "",
-        func: (key: string): CheckStringArgs => {
+        func: (key: string): CheckStringProps => {
             return { key: key, errorMsg: "-1" }
         },
         expected: [

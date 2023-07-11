@@ -1,18 +1,18 @@
 import tester from "./../tester";
 import mockObject, { amountKeys } from "../mockObject";
 
-import { checkNumber, CheckResult, CheckNumberArgs, errorFunctionDud, successFunctionDud } from "@samuel-risner/json-contents-checker";
+import { checkNumber, CheckResult, CheckNumberProps, errorFunctionDud, successFunctionDud } from "@samuel-risner/json-contents-checker";
 
 type TestVariant = {
     namePart: string;
-    func: (key: string) => CheckNumberArgs;
+    func: (key: string) => CheckNumberProps;
     expected: CheckResult[];
 }
 
 const testVariations: TestVariant[] = [
     {
         namePart: "-",
-        func: (key: string): CheckNumberArgs => {
+        func: (key: string): CheckNumberProps => {
             return { key: key, errorMsg: "-1" }
         },
         expected: [
@@ -37,7 +37,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "allowNull",
-        func: (key: string): CheckNumberArgs => {
+        func: (key: string): CheckNumberProps => {
             return { key: key, errorMsg: "-1", allowNull: true }
         },
         expected: [
@@ -62,7 +62,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "allowUndefined",
-        func: (key: string): CheckNumberArgs => {
+        func: (key: string): CheckNumberProps => {
             return { key: key, errorMsg: "-1", allowUndefined: true }
         },
         expected: [
@@ -87,7 +87,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "isSafe",
-        func: (key: string): CheckNumberArgs => {
+        func: (key: string): CheckNumberProps => {
             return { key: key, errorMsg: "-1", isSafe: true }
         },
         expected: [
@@ -112,7 +112,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "maxValue: 875",
-        func: (key: string): CheckNumberArgs => {
+        func: (key: string): CheckNumberProps => {
             return { key: key, errorMsg: "-1", maxValue: 875 }
         },
         expected: [
@@ -137,7 +137,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "allowDecimal",
-        func: (key: string): CheckNumberArgs => {
+        func: (key: string): CheckNumberProps => {
             return { key: key, errorMsg: "-1", allowDecimal: true }
         },
         expected: [
@@ -162,7 +162,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "allowNaN",
-        func: (key: string): CheckNumberArgs => {
+        func: (key: string): CheckNumberProps => {
             return { key: key, errorMsg: "-1", allowNaN: true }
         },
         expected: [
@@ -187,7 +187,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "minValue: 875",
-        func: (key: string): CheckNumberArgs => {
+        func: (key: string): CheckNumberProps => {
             return { key: key, errorMsg: "-1", minValue: 875 }
         },
         expected: [
@@ -212,7 +212,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "isSafe, allowDecimal",
-        func: (key: string): CheckNumberArgs => {
+        func: (key: string): CheckNumberProps => {
             return { key: key, errorMsg: "-1", isSafe: true, allowDecimal: true }
         },
         expected: [

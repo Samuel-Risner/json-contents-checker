@@ -12,7 +12,7 @@ import {
     // Types:
     ObjectToCheck, // The type for the object that you want to check
 
-    CheckBooleanArgs, CheckStringArgs, CheckNumberArgs, // Props for the big check functions
+    CheckBooleanProps, CheckStringProps, CheckNumberProps, // Props for the big check functions
     
     CheckFunctionChain, // The type for the function that you get returned by calling one of: "checkString", "checkBoolean", "checkNumber" or "combineChain" on a small check class
 
@@ -20,8 +20,8 @@ import {
     CheckFunctionPreCheck, // The function that you get returned by calling "combine" on "SmallCheckOnCreation" or "SmallCheckOnCombine"
 
     CheckResult, // The result from calling one of those two function types ^
-    SmallCheckArgs, // The arguments passed to the small check functions ("CheckFunctionOnCheck") or classes ("combine" on "SmallCheckOnCombine" or the constructor on "SmallCheckOnCreation")
-    SmallCheckArgsOptional, // Special case of ^ needed for "SmallCheckOnCreation"
+    SmallCheckProps, // The arguments passed to the small check functions ("CheckFunctionOnCheck") or classes ("combine" on "SmallCheckOnCombine" or the constructor on "SmallCheckOnCreation")
+    SmallCheckPropsOptional, // Special case of ^ needed for "SmallCheckOnCreation"
 
     CheckedRequest, // When using middleware in ExpressJS use "req: CheckedRequest" instead of "req: Request"
     CheckedRequestContents, // The attribute in ^ that was set by the middleware

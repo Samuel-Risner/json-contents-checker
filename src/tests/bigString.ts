@@ -1,18 +1,18 @@
 import tester from "./../tester";
 import mockObject, { amountKeys } from "../mockObject";
 
-import { checkString, CheckResult, CheckStringArgs, errorFunctionDud, successFunctionDud } from "@samuel-risner/json-contents-checker";
+import { checkString, CheckResult, CheckStringProps, errorFunctionDud, successFunctionDud } from "@samuel-risner/json-contents-checker";
 
 type TestVariant = {
     namePart: string;
-    func: (key: string) => CheckStringArgs;
+    func: (key: string) => CheckStringProps;
     expected: CheckResult[];
 }
 
 const testVariations: TestVariant[] = [
     {
         namePart: "-",
-        func: (key: string): CheckStringArgs => {
+        func: (key: string): CheckStringProps => {
             return { key: key, errorMsg: "-1" }
         },
         expected: [
@@ -37,7 +37,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "allowNull",
-        func: (key: string): CheckStringArgs => {
+        func: (key: string): CheckStringProps => {
             return { key: key, errorMsg: "-1", allowNull: true }
         },
         expected: [
@@ -62,7 +62,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "allowUndefined",
-        func: (key: string): CheckStringArgs => {
+        func: (key: string): CheckStringProps => {
             return { key: key, errorMsg: "-1", allowUndefined: true }
         },
         expected: [
@@ -87,7 +87,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "invalidChars: 'y'",
-        func: (key: string): CheckStringArgs => {
+        func: (key: string): CheckStringProps => {
             return { key: key, errorMsg: "-1", invalidChars: "y" }
         },
         expected: [
@@ -112,7 +112,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "maxLength: 11",
-        func: (key: string): CheckStringArgs => {
+        func: (key: string): CheckStringProps => {
             return { key: key, errorMsg: "-1", maxLength: 11 }
         },
         expected: [
@@ -137,7 +137,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "minLength: 11",
-        func: (key: string): CheckStringArgs => {
+        func: (key: string): CheckStringProps => {
             return { key: key, errorMsg: "-1", minLength: 11 }
         },
         expected: [
@@ -162,7 +162,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "regExpMatch: new RegExp('some string')",
-        func: (key: string): CheckStringArgs => {
+        func: (key: string): CheckStringProps => {
             return { key: key, errorMsg: "-1", regExpMatch: new RegExp("some string") }
         },
         expected: [
@@ -187,7 +187,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "",
-        func: (key: string): CheckStringArgs => {
+        func: (key: string): CheckStringProps => {
             return { key: key, errorMsg: "-1", regExpNoMatch: new RegExp("some string") }
         },
         expected: [
@@ -212,7 +212,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "validChars: 'some string'",
-        func: (key: string): CheckStringArgs => {
+        func: (key: string): CheckStringProps => {
             return { key: key, errorMsg: "-1", validChars: "some string" }
         },
         expected: [

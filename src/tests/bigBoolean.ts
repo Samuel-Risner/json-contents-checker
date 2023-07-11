@@ -1,18 +1,18 @@
 import tester from "./../tester";
 import mockObject, { amountKeys } from "../mockObject";
 
-import { checkBoolean, CheckResult, CheckBooleanArgs, errorFunctionDud, successFunctionDud } from "@samuel-risner/json-contents-checker";
+import { checkBoolean, CheckResult, CheckBooleanProps, errorFunctionDud, successFunctionDud } from "@samuel-risner/json-contents-checker";
 
 type TestVariant = {
     namePart: string;
-    func: (key: string) => CheckBooleanArgs;
+    func: (key: string) => CheckBooleanProps;
     expected: CheckResult[];
 }
 
 const testVariations: TestVariant[] = [
     {
         namePart: "",
-        func: (key: string): CheckBooleanArgs => {
+        func: (key: string): CheckBooleanProps => {
             return { key: key, errorMsg: "-1" }
         },
         expected: [
@@ -37,7 +37,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "",
-        func: (key: string): CheckBooleanArgs => {
+        func: (key: string): CheckBooleanProps => {
             return { key: key, errorMsg: "-1", allowNull: true }
         },
         expected: [
@@ -62,7 +62,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "",
-        func: (key: string): CheckBooleanArgs => {
+        func: (key: string): CheckBooleanProps => {
             return { key: key, errorMsg: "-1", allowUndefined: true }
         },
         expected: [
@@ -87,7 +87,7 @@ const testVariations: TestVariant[] = [
     },
     {
         namePart: "",
-        func: (key: string): CheckBooleanArgs => {
+        func: (key: string): CheckBooleanProps => {
             return { key: key, errorMsg: "-1", allowNull: true, allowUndefined: true }
         },
         expected: [

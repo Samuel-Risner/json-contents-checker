@@ -1,9 +1,9 @@
-import { SmallCheckOnCheck, SmallCheckOnCombine, SmallCheckOnCreation, CheckResult, SmallCheckArgs, SmallCheckArgsOptional } from "@samuel-risner/json-contents-checker";
+import { SmallCheckOnCheck, SmallCheckOnCombine, SmallCheckOnCreation, CheckResult, SmallCheckProps, SmallCheckPropsOptional } from "@samuel-risner/json-contents-checker";
 
 import mockObject from "../../mockObject";
 
-const props: SmallCheckArgs = { key: "", objectToCheck: mockObject };
-const props2: SmallCheckArgsOptional = {};
+const props: SmallCheckProps = { key: "", objectToCheck: mockObject };
+const props2: SmallCheckPropsOptional = {};
 
 const result1: CheckResult = new SmallCheckOnCheck()
     .isString(-1, "The thing that you are trying to check isn't a string.")
