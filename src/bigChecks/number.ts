@@ -1,4 +1,5 @@
-import { CheckFunctionChain, CheckReturn, ErrorFunction, ObjectToCheck, SuccessFunction } from "./../types";
+import { errorFunctionDud, successFunctionDud } from "../funcs";
+import { CheckFunctionChain, CheckReturn, ErrorFunction, ObjectToCheck, SuccessFunction } from "../types";
 
 export { checkNumber, CheckNumberArgs }
 
@@ -53,7 +54,7 @@ function checkNumber({
     minValue,
     maxValue
 }: CheckNumberArgs): CheckFunctionChain {
-    return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
+    return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction = errorFunctionDud, successFunction: SuccessFunction = successFunctionDud): CheckReturn => {
         const toCheck: unknown = objectToCheck[key];
 
         if (_checkNumber(toCheck, allowUndefined, allowNull, allowNaN, isSafe, allowDecimal, minValue, maxValue)) {

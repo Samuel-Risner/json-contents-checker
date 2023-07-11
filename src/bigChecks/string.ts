@@ -1,4 +1,5 @@
-import { CheckFunctionChain, CheckReturn, ErrorFunction, ObjectToCheck, SuccessFunction } from "./../types";
+import { errorFunctionDud, successFunctionDud } from "../funcs";
+import { CheckFunctionChain, CheckReturn, ErrorFunction, ObjectToCheck, SuccessFunction } from "../types";
 
 export { checkString, CheckStringArgs }
 
@@ -56,7 +57,7 @@ function checkString({
     regExpMatch,
     regExpNoMatch
 }: CheckStringArgs): CheckFunctionChain {
-    return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
+    return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction = errorFunctionDud, successFunction: SuccessFunction = successFunctionDud): CheckReturn => {
         const toCheck: unknown = objectToCheck[key];
 
         if (_checkString(toCheck, allowUndefined, allowNull, minLength, maxLength, validChars, invalidChars, regExpMatch, regExpNoMatch)) {

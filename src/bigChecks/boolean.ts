@@ -1,4 +1,5 @@
-import { CheckFunctionChain, CheckReturn, ErrorFunction, ObjectToCheck, SuccessFunction } from "./../types";
+import { errorFunctionDud, successFunctionDud } from "../funcs";
+import { CheckFunctionChain, CheckReturn, ErrorFunction, ObjectToCheck, SuccessFunction } from "../types";
 
 export { checkBoolean, CheckBooleanArgs }
 
@@ -36,7 +37,7 @@ function checkBoolean({
     allowUndefined,
     allowNull
 }: CheckBooleanArgs): CheckFunctionChain {
-    return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction, successFunction: SuccessFunction): CheckReturn => {
+    return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction = errorFunctionDud, successFunction: SuccessFunction = successFunctionDud): CheckReturn => {
         const toCheck: unknown = objectToCheck[key];
 
         if (_checkBoolean(toCheck, allowUndefined, allowNull)) {
