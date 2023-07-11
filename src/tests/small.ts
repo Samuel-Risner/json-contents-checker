@@ -1,11 +1,11 @@
 import tester from "./../tester";
 import mockObject, { amountKeys } from "../mockObject";
-import { SmallCheckOnCheck, SmallCheckOnCombine, SmallCheckOnCreation, errorFunctionDud, successFunctionDud, CheckReturn } from "@samuel-risner/json-contents-checker";
+import { SmallCheckOnCheck, SmallCheckOnCombine, SmallCheckOnCreation, errorFunctionDud, successFunctionDud, CheckResult } from "@samuel-risner/json-contents-checker";
 
 type TestVariant = {
     "namePart": string;
-    "expectedOutputs": CheckReturn[],
-    "funcs": [(key: string) => CheckReturn, (key: string) => CheckReturn, (key: string) => CheckReturn]
+    "expectedOutputs": CheckResult[],
+    "funcs": [(key: string) => CheckResult, (key: string) => CheckResult, (key: string) => CheckResult]
 }
 
 const defaultArgs = { objectToCheck: mockObject, successCode: 0, successMsg: "", errorFunction: errorFunctionDud, successFunction: successFunctionDud }
@@ -35,19 +35,19 @@ const testVariations: TestVariant[] = [
             [false, -1, "-1"], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isString(-1, "-1")
                     .invalidLetters(-2, "-2", "xyz")
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isString(-1, "-1")
                     .invalidLetters(-2, "-2", "xyz")
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isString(-1, "-1")
                     .invalidLetters(-2, "-2", "xyz")
@@ -77,17 +77,17 @@ const testVariations: TestVariant[] = [
             [false, -1, "-1"], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isBoolean(-1, "-1")
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isBoolean(-1, "-1")
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isBoolean(-1, "-1")
                     .combine()();
@@ -116,17 +116,17 @@ const testVariations: TestVariant[] = [
             [true, 0, ""], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isFiniteNumber(-1, "-1")
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isFiniteNumber(-1, "-1")
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isFiniteNumber(-1, "-1")
                     .combine()();
@@ -155,17 +155,17 @@ const testVariations: TestVariant[] = [
             [false, -1, "-1"], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isNaN(-1, "-1")
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isNaN(-1, "-1")
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isNaN(-1, "-1")
                     .combine()();
@@ -194,17 +194,17 @@ const testVariations: TestVariant[] = [
             [true, 0, ""], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isNotNull(-1, "-1")
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isNotNull(-1, "-1")
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isNotNull(-1, "-1")
                     .combine()();
@@ -233,17 +233,17 @@ const testVariations: TestVariant[] = [
             [true, 0, ""], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isNotUndefined(-1, "-1")
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isNotUndefined(-1, "-1")
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isNotUndefined(-1, "-1")
                     .combine()();
@@ -272,17 +272,17 @@ const testVariations: TestVariant[] = [
             [true, 0, ""], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isNumber(-1, "-1")
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isNumber(-1, "-1")
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isNumber(-1, "-1")
                     .combine()();
@@ -311,17 +311,17 @@ const testVariations: TestVariant[] = [
             [false, -1, "-1"], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isSafeNumber(-1, "-1")
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isSafeNumber(-1, "-1")
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isSafeNumber(-1, "-1")
                     .combine()();
@@ -350,17 +350,17 @@ const testVariations: TestVariant[] = [
             [false, -1, "-1"], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isString(-1, "-1")
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isString(-1, "-1")
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isString(-1, "-1")
                     .combine()();
@@ -389,19 +389,19 @@ const testVariations: TestVariant[] = [
             [false, -1, "-1"], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isString(-1, "-1")
                     .maxLength(-2, "-2", 11)
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isString(-1, "-1")
                     .maxLength(-2, "-2", 11)
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isString(-1, "-1")
                     .maxLength(-2, "-2", 11)
@@ -431,19 +431,19 @@ const testVariations: TestVariant[] = [
             [true, 0, ""], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isNumber(-1, "-1")
                     .maxSize(-2, "-2", 875)
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isNumber(-1, "-1")
                     .maxSize(-2, "-2", 875)
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isNumber(-1, "-1")
                     .maxSize(-2, "-2", 875)
@@ -473,19 +473,19 @@ const testVariations: TestVariant[] = [
             [false, -1, "-1"], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isString(-1, "-1")
                     .minLength(-2, "-2", 11)
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isString(-1, "-1")
                     .minLength(-2, "-2", 11)
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isString(-1, "-1")
                     .minLength(-2, "-2", 11)
@@ -515,19 +515,19 @@ const testVariations: TestVariant[] = [
             [false, -2, "-2"], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isNumber(-1, "-1")
                     .minSize(-2, "-2", 875)
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isNumber(-1, "-1")
                     .minSize(-2, "-2", 875)
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isNumber(-1, "-1")
                     .minSize(-2, "-2", 875)
@@ -557,19 +557,19 @@ const testVariations: TestVariant[] = [
             [false, -1, "-1"], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isString(-1, "-1")
                     .validLetters(-2, "-2", "some string")
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isString(-1, "-1")
                     .validLetters(-2, "-2", "some string")
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isString(-1, "-1")
                     .validLetters(-2, "-2", "some string")
@@ -599,19 +599,19 @@ const testVariations: TestVariant[] = [
             [false, -1, "-1"], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isString(-1, "-1")
                     .regExpMatch(-2, "-2", new RegExp("some string"))
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isString(-1, "-1")
                     .regExpMatch(-2, "-2", new RegExp("some string"))
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isString(-1, "-1")
                     .regExpMatch(-2, "-2", new RegExp("some string"))
@@ -641,19 +641,19 @@ const testVariations: TestVariant[] = [
             [false, -1, "-1"], // Number.MIN_SAFE_INTEGER - 1
         ],
         "funcs": [
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCheck()
                     .isString(-1, "-1")
                     .regExpNoMatch(-2, "-2", new RegExp("some string"))
                     .combine()({ key: key, ...defaultArgs });
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCombine()
                     .isString(-1, "-1")
                     .regExpNoMatch(-2, "-2", new RegExp("some string"))
                     .combine({ key: key, ...defaultArgs })();
             },
-            (key: string): CheckReturn => {
+            (key: string): CheckResult => {
                 return new SmallCheckOnCreation({ key: key, ...defaultArgs })
                     .isString(-1, "-1")
                     .regExpNoMatch(-2, "-2", new RegExp("some string"))

@@ -21,7 +21,7 @@ import {
     CheckFunctionOnCheck, // The function that you get returned by calling "combine" on "SmallCheckOnCheck"
     CheckFunctionPreCheck, // The function that you get returned by calling "combine" on "SmallCheckOnCreation" or "SmallCheckOnCombine"
 
-    CheckReturn, // What you get returned from calling one of those two function types ^
+    CheckResult, // The result from calling one of those two function types ^
     SmallCheckArgs, // The arguments passed to the small check functions ("CheckFunctionOnCheck") or classes ("combine" on "SmallCheckOnCombine" or the constructor on "SmallCheckOnCreation")
     SmallCheckArgsOptional, // Special case of ^ needed for "SmallCheckOnCreation"
 
@@ -31,10 +31,7 @@ import {
 
     Middleware, // The type of the function that chainChecksMiddleware returns
 
-    ErrorFunction, SuccessFunction, // The function types for the error and success functions
-
-    ChainResult, // What "chainChecks" returns
-    ChainResultKey // Result in ^ for each checked key
+    ErrorFunction, SuccessFunction // The function types for the error and success functions
 } from "@samuel-risner/json-contents-checker";
 
 // ## Error and success functions
@@ -74,7 +71,7 @@ const someCheck1: CheckFunctionOnCheck = new SmallCheckOnCheck()
     .minLength(-3, "Ups! Too short.", 2)
     .combine();
 
-const result1: CheckReturn = someCheck1({ key: "key0", objectToCheck: mockObject });
+const result1: CheckResult = someCheck1({ key: "key0", objectToCheck: mockObject });
 
 const someCheck2: CheckFunctionPreCheck = new SmallCheckOnCombine()
     .isString(-1, "The thing that you are trying to check isn't a string.")
@@ -82,7 +79,7 @@ const someCheck2: CheckFunctionPreCheck = new SmallCheckOnCombine()
     .minLength(-3, "Ups! Too short.", 2)
     .combine({ key: "key0", objectToCheck: mockObject });
 
-const result2: CheckReturn = someCheck2();
+const result2: CheckResult = someCheck2();
 
 const someCheck3: CheckFunctionPreCheck = new SmallCheckOnCreation({ key: "key0", objectToCheck: mockObject })
     .isString(-1, "The thing that you are trying to check isn't a string.")
@@ -90,21 +87,21 @@ const someCheck3: CheckFunctionPreCheck = new SmallCheckOnCreation({ key: "key0"
     .minLength(-3, "Ups! Too short.", 2)
     .combine();
 
-const result3: CheckReturn = someCheck3();
+const result3: CheckResult = someCheck3();
 
-const otherResult1: CheckReturn = new SmallCheckOnCheck()
+const otherResult1: CheckResult = new SmallCheckOnCheck()
     .isString(-1, "The thing that you are trying to check isn't a string.")
     .maxLength(-2, "The string is too long", 5)
     .minLength(-3, "Ups! Too short.", 2)
     .evaluate({ key: "key0", objectToCheck: mockObject });
 
-const otherResult2: CheckReturn = new SmallCheckOnCombine()
+const otherResult2: CheckResult = new SmallCheckOnCombine()
     .isString(-1, "The thing that you are trying to check isn't a string.")
     .maxLength(-2, "The string is too long", 5)
     .minLength(-3, "Ups! Too short.", 2)
     ({ key: "key0", objectToCheck: mockObject });
 
-const otherResult3: CheckReturn =  new SmallCheckOnCreation({ key: "key0", objectToCheck: mockObject })
+const otherResult3: CheckResult =  new SmallCheckOnCreation({ key: "key0", objectToCheck: mockObject })
     .isString(-1, "The thing that you are trying to check isn't a string.")
     .maxLength(-2, "The string is too long", 5)
     .minLength(-3, "Ups! Too short.", 2)

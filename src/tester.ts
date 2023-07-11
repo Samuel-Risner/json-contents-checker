@@ -1,4 +1,4 @@
-import { CheckReturn } from "@samuel-risner/json-contents-checker";
+import { CheckResult } from "@samuel-risner/json-contents-checker";
 
 class Tester {
 
@@ -12,7 +12,7 @@ class Tester {
         this.criticalTests = 0;
     }
 
-    private passedTest(name: string, expectedOutput: CheckReturn, actualOutput: CheckReturn): true {
+    private passedTest(name: string, expectedOutput: CheckResult, actualOutput: CheckResult): true {
         console.log(`✅ Test passed for '${name}'!`);
         console.log(`\texpected output: [${expectedOutput}] actual output: [${actualOutput}]`);
         console.log();
@@ -20,7 +20,7 @@ class Tester {
         return true;
     }
 
-    private failedTest(name: string, expectedOutput: CheckReturn, actualOutput: CheckReturn): false {
+    private failedTest(name: string, expectedOutput: CheckResult, actualOutput: CheckResult): false {
         console.log(`❌ Test failed for '${name}'!`);
         console.log(`\texpected output: [${expectedOutput}] actual output: [${actualOutput}]`);
         console.log();
@@ -47,7 +47,7 @@ class Tester {
         console.log(`\t✅ Passed tests: ${this.passedTests}`);
     }
 
-    test(name: string, expectedOutput: CheckReturn | undefined, testFunction:(key: string) => CheckReturn, key: string): boolean {
+    test(name: string, expectedOutput: CheckResult | undefined, testFunction:(key: string) => CheckResult, key: string): boolean {
         const output = testFunction(key);
 
         if (expectedOutput === undefined) {

@@ -19,7 +19,7 @@ import {
     CheckFunctionOnCheck, // The function that you get returned by calling "combine" on "SmallCheckOnCheck"
     CheckFunctionPreCheck, // The function that you get returned by calling "combine" on "SmallCheckOnCreation" or "SmallCheckOnCombine"
 
-    CheckReturn, // What you get returned from calling one of those two function types ^
+    CheckResult, // The result from calling one of those two function types ^
     SmallCheckArgs, // The arguments passed to the small check functions ("CheckFunctionOnCheck") or classes ("combine" on "SmallCheckOnCombine" or the constructor on "SmallCheckOnCreation")
     SmallCheckArgsOptional, // Special case of ^ needed for "SmallCheckOnCreation"
 

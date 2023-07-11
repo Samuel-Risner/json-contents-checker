@@ -1,12 +1,12 @@
 import tester from "./../tester";
 import mockObject, { amountKeys } from "../mockObject";
 
-import { checkNumber, CheckReturn, CheckNumberArgs, errorFunctionDud, successFunctionDud } from "@samuel-risner/json-contents-checker";
+import { checkNumber, CheckResult, CheckNumberArgs, errorFunctionDud, successFunctionDud } from "@samuel-risner/json-contents-checker";
 
 type TestVariant = {
     namePart: string;
     func: (key: string) => CheckNumberArgs;
-    expected: CheckReturn[];
+    expected: CheckResult[];
 }
 
 const testVariations: TestVariant[] = [
