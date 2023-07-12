@@ -13,6 +13,7 @@ type CheckStringProps = {
     allowNull?: boolean;
     minLength?: number;
     maxLength?: number;
+    exactLength?: number;
     validChars?: string;
     invalidChars?: string;
     regExpMatch?: RegExp;
@@ -34,6 +35,7 @@ type CheckStringProps = {
  * 
  * @param minLength The minimum length the value that is being checked may have.
  * @param maxValue The maximum length the value that is being checked may have.
+ * @param exactLength The length the value that is being checked must have.
  * 
  * @param validChars A string with characters that the value that is being checked may contain. If the value that is being checked contains any other characters, `false` is returned. Note that an empty string ("") always passes.
  * @param invalidChars A string with characters that the value that is being checked may not contain. If the value that is being checked contains any characters that were specified, `false` is returned.
@@ -52,6 +54,7 @@ function checkString({
     allowNull,
     minLength,
     maxLength,
+    exactLength,
     validChars,
     invalidChars,
     regExpMatch,
@@ -60,7 +63,7 @@ function checkString({
     return (objectToCheck: ObjectToCheck, errorFunction: ErrorFunction = errorFunctionDud, successFunction: SuccessFunction = successFunctionDud): CheckResult => {
         const toCheck: unknown = objectToCheck[key];
 
-        if (_checkString(toCheck, allowUndefined, allowNull, minLength, maxLength, validChars, invalidChars, regExpMatch, regExpNoMatch)) {
+        if (_checkString(toCheck, allowUndefined, allowNull, minLength, maxLength, exactLength, validChars, invalidChars, regExpMatch, regExpNoMatch)) {
             successFunction(successCode, successMsg, key);
             return [true, successCode, successMsg];
         } else {
@@ -86,6 +89,7 @@ function _checkString(
     allowNull?: boolean,
     minLength?: number,
     maxLength?: number,
+    exactLength?: number,
     validChars?: string,
     invalidChars?: string,
     regExpMatch?: RegExp,
@@ -96,6 +100,7 @@ function _checkString(
     if (typeof toCheck !== "string") return false;
     if ((minLength !== undefined) && ((toCheck as string).length < minLength)) return false;
     if ((maxLength !== undefined) && ((toCheck as string).length > maxLength)) return false;
+    if ((exactLength !== undefined) && ((toCheck as string).length !== exactLength)) return false;
     if (validChars) {
         for (const letter of (toCheck as string)) {
             if (!validChars.includes(letter)) return false;

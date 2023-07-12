@@ -10,6 +10,7 @@ type CheckStringProps = {
     allowNull?: boolean;
     minLength?: number;
     maxLength?: number;
+    exactLength?: number;
     validChars?: string;
     invalidChars?: string;
     regExpMatch?: RegExp;
@@ -30,6 +31,7 @@ type CheckStringProps = {
  *
  * @param minLength The minimum length the value that is being checked may have.
  * @param maxValue The maximum length the value that is being checked may have.
+ * @param exactLength The length the value that is being checked must have.
  *
  * @param validChars A string with characters that the value that is being checked may contain. If the value that is being checked contains any other characters, `false` is returned. Note that an empty string ("") always passes.
  * @param invalidChars A string with characters that the value that is being checked may not contain. If the value that is being checked contains any characters that were specified, `false` is returned.
@@ -38,4 +40,4 @@ type CheckStringProps = {
  *
  * @returns A tuple consisting of a boolean indicating if the check was successful (`true`) or not, a number which is either the error code if the check failed, otherwise the success code and a string which is either the error message if the check filed, otherwise the success message.
  */
-declare function checkString({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull, minLength, maxLength, validChars, invalidChars, regExpMatch, regExpNoMatch }: CheckStringProps): CheckFunctionChain;
+declare function checkString({ key, errorCode, errorMsg, successCode, successMsg, allowUndefined, allowNull, minLength, maxLength, exactLength, validChars, invalidChars, regExpMatch, regExpNoMatch }: CheckStringProps): CheckFunctionChain;

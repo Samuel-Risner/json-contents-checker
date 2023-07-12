@@ -202,6 +202,24 @@ export default abstract class SmallCheckCore extends Function {
     }
 
     /**
+     * ❌ The check fails when the length of the value is unequal than `exactLength`.
+     * 
+     * ✅ The check succeeds when the length of the value is equal to `exactLength`.
+     * 
+     * ❗ **NOTE: Before using this check, you should confirm that the value is of type string e.g. use `isString`.**
+     * 
+     * @param errorCode The code which is reported when the check fails.
+     * @param errorMsg The message which is reported when the check fails.
+     * @param exactLength The maximum length the value may have.
+     * @returns This object, meaning that you can chain checks.
+     */
+    exactLength(errorCode: number, errorMsg: string, exactLength: number): this {
+        return this.checkCore(errorCode, errorMsg, (toCheck: string): boolean => {
+            return toCheck.length !== exactLength;
+        })
+    }
+
+    /**
      * ❌ The check fails when the size of the value is smaller than the `minSize`.
      * 
      * ✅ The check succeeds when the size of the value is greater than the `minSize`.
