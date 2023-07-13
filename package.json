@@ -1,6 +1,6 @@
 {
   "name": "@samuel-risner/json-contents-checker",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A npm package (for express.js) for checking the contents of a json object. (The TypeScript files are here.)",
   "main": "dist/index.js",
   "types": "@types/index.d.ts",

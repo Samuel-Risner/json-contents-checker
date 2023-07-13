@@ -215,7 +215,7 @@ export default abstract class SmallCheckCore extends Function {
      */
     exactLength(errorCode: number, errorMsg: string, exactLength: number): this {
         return this.checkCore(errorCode, errorMsg, (toCheck: string): boolean => {
-            return toCheck.length !== exactLength;
+            return toCheck.length === exactLength;
         })
     }
 
